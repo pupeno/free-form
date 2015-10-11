@@ -1,0 +1,16 @@
+/target
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+.hgignore
+.hg/
+
+# IntelliJ https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
