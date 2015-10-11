@@ -50,6 +50,10 @@ to make this input to connect to the email we would change it to:
 
 ## Usage
 
+First, you have to include Free-form in your project:
+
+[![Clojars Project](http://clojars.org/com.carouselapps/free-form/latest-version.svg)](http://clojars.org/com.carouselapps/free-form)
+
 To activate a form you call ```free-form.core/form``` passing the set of values to display when the form is shown for
 the first time, the set of errors to display, a callback function to receive changes to the state and the form itself.
 For example:
