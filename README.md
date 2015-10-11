@@ -83,7 +83,7 @@ The form is just your traditional Reagent template, in this case outputting a Bo
     [:div.text-danger {:free-form/error-message {:key :email}} [:p]]]]]]
 ```
 
-There are three special keywords added.
+There are three special keywords added:
 
 * ```:free-form/field``` marks the element as being an input and the passed key is the to be used from the map of values.
 As an alternative, you can pass a set of keys, as in: ```{:ks [:user :email]}```, as you do with the function ```get-in```.
@@ -93,7 +93,6 @@ As an alternative, you can pass a set of keys, as in: ```{:ks [:user :email]}```
 case ```:div.text-danger``` will not be output at all. The field to be read form the map of errors is specified by
  ```:key``` or ```:ks```. Lastly, the element inside this element will be used to output each of the error messages, so
  this might end up looking like:
-
 ```clojure
 [:div.text-danger [:p "Password is too short"] [:p "Password must contain a symbol"]]
 ```
