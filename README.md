@@ -85,14 +85,12 @@ The form is just your traditional Reagent template, in this case outputting a Bo
 
 There are three special keywords added.
 
-```:free-form/field``` marks the element as being an input and the passed key is the to be used from the map of values.
+* ```:free-form/field``` marks the element as being an input and the passed key is the to be used from the map of values.
 As an alternative, you can pass a set of keys, as in: ```{:ks [:user :email]}```, as you do with the function
 ```get-in```.
-
-```:free-form/error-class``` will add a class if there's a validation error for the field. As with the previous one,
+* ```:free-form/error-class``` will add a class if there's a validation error for the field. As with the previous one,
 ```:key``` or ```:ks``` marks the field, and ```:error``` the class to be added in case of error.
-
-```:free-form/error-message``` adds error messages. If there are no error messages, the surrounding element, in this
+* ```:free-form/error-message``` adds error messages. If there are no error messages, the surrounding element, in this
 case ```:div.text-danger``` will not be output at all. The field to be read form the map of errors is specified by
  ```:key``` or ```:ks```. Lastly, the element inside this element will be used to output each of the error messages, so
  this might end up looking like:
