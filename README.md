@@ -1,5 +1,7 @@
 # Free-form
 
+[![Join the chat at https://gitter.im/carouselapps/free-form](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/carouselapps/free-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A ClojureScript library to help building web forms with reagent and optionally re-frame. In the spirit of Clojure this
 library is designed to do one task and do it well and be composable with other libraries that already exist for
 performing other tasks. Reagent-forms was a big influence and inspiration but the desire to have something fit well with
