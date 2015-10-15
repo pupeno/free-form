@@ -50,10 +50,11 @@
   (if (not (error-messages? node))
     node
     (let [[attributes _ ks] (extract-attributes node :free-form/error-message)]
-      (when-let [errors (get-in errors ks)]
+      (if-let [errors (get-in errors ks)]
         (vec (concat
-               (drop-last (dissoc (assoc node attributes-index attributes)))
-               (map #(conj (get node 2) %) errors)))))))
+               (drop-last (assoc node attributes-index attributes))
+               (map #(conj (get node 2) %) errors)))
+        node))))
 
 (defn form [values errors on-change form]
   (let [errors (or errors {})]

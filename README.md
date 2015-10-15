@@ -122,6 +122,14 @@ example:
  [...]]
 ```
 
+## Changelog
+
+### v0.1.1 - 2015-10-15
+- Fixed a bug when dealing with errors.
+
+### v0.1.0 - 2015-10-11
+- Initial version extracted from [Ninja Tools](http://tools.screensaver.ninja).
+
 ## License
 
 This library has been extracted from the project [Ninja Tools](http://tools.screensaver.ninja).
