@@ -14,7 +14,7 @@
   :figwheel {:css-dirs ["resources/public/css"]}
 
   :cljsbuild {:builds [{:id "dev"
-                        :source-paths ["src/cljs"]
+                        :source-paths ["src/cljs" "../src/cljs"]
 
                         :figwheel {:on-jsload "example.core/mount-root"}
 
