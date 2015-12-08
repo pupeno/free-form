@@ -44,7 +44,7 @@ which then you pepper with special keywords to trigger the activation of inputs,
 to make this input to connect to the email we would change it to:
 
 ```clojure
-[:input {:free-form/field {:key :email}
+[:input {:free-form/input {:key :email}
          :type        :email
          :id          :email
          :placeholder "sam@example.com"}]
@@ -82,7 +82,7 @@ The form is just your traditional Reagent template, in this case outputting a Bo
  [:div.form-horizontal
   [:div.form-group {:free-form/error-class {:key :email :error "has-error"}}
    [:label.col-sm-2.control-label {:for :email} "Email"]
-   [:div.col-sm-10 [:input.form-control {:free-form/field {:key :email}
+   [:div.col-sm-10 [:input.form-control {:free-form/input {:key :email}
                                          :type            :email
                                          :id              :email
                                          :placeholder     "sam@example.com"}]
@@ -91,7 +91,7 @@ The form is just your traditional Reagent template, in this case outputting a Bo
 
 There are three special keywords added:
 
-* ```:free-form/field``` marks the element as being an input and the passed key is the to be used from the map of values.
+* ```:free-form/input``` marks the element as being an input and the passed key is the to be used from the map of values.
 As an alternative, you can pass a set of keys, as in: ```{:ks [:user :email]}```, as you do with the function ```get-in```.
 * ```:free-form/error-class``` will add a class if there's a validation error for the field. As with the previous one,
 ```:key``` or ```:ks``` marks the field, and ```:error``` the class to be added in case of error.
