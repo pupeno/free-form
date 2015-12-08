@@ -5,10 +5,10 @@
             [re-frame.core :as re-frame]))
 
 (defn form [values errors event form]
-  [core/form values errors
-   (fn [ks value]
-     (let [event-v (if (fn? event)
-                     (event ks value)
-                     [event ks value])]
-       (re-frame/dispatch event-v)))
-   form])
+  (let [re-frame-event-generator
+        (fn [ks value]
+          (let [event-v (if (fn? event)
+                          (event ks value)
+                          [event ks value])]
+            (re-frame/dispatch event-v)))]
+    [core/form values errors re-frame-event-generator form]))
