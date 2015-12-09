@@ -8,6 +8,7 @@
     (fn []
       [:div
        [:h1 "Re-frame + Bootstrap"]
+       [:h2 "Horizontal"]
        [ff-re-frame/form {} {} :update-re-frame-bootstrap
         [:form.form-horizontal {:novalidate true
                                 #_:free-form/renderer #_{:name        :bootstrap
@@ -28,4 +29,11 @@
          [:div.form-group
           [:div.col-sm-offset-2.col-sm-5
            [:button.btn.btn-primary {:type :submit}
-            "Button"]]]]]])))
+            "Button"]]]]]
+       [:h2 "Inline"]
+       [:hr]
+       [:h1 "Re-frame"]
+       [:hr]
+       [:h1 "Reagent + Bootstrap"]
+       [:hr]
+       [:h1 "Reagent"]])))
