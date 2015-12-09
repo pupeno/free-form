@@ -1,4 +1,4 @@
 (ns example.db)
 
 (def default-db
-  {:name "re-frame"})
+  {:re-frame-bootstrap {}})

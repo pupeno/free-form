@@ -3,6 +3,6 @@
     (:require [re-frame.core :as re-frame]))
 
 (re-frame/register-sub
- :name
- (fn [db]
-   (reaction (:name @db))))
+  :re-frame-bootstrap
+  (fn [db]
+    (reaction (:re-frame-bootstrap @db))))
