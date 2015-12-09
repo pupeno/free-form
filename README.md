@@ -124,6 +124,11 @@ example:
 
 ## Changelog
 
+### Next version
+- Bootstrap support.
+- Change API from :free-form/field to :free-form/input.
+- Added example app to help test, excercise and develop the library.
+
 ### v0.1.1 - 2015-10-15
 - Fixed a bug when dealing with errors.
 
