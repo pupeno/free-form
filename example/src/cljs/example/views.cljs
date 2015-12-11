@@ -25,7 +25,7 @@
                             :placeholder "placeholder@example.com"}]
          [:free-form/field {:type  :password
                             :label "Password"
-                            :ks    [:password]}]
+                            :keys    [:password]}]
          [:div.form-group
           [:div.col-sm-offset-2.col-sm-5
            [:button.btn.btn-primary {:type :submit}
