@@ -12,15 +12,15 @@
         keys (or (:keys re-attributes) [(:key re-attributes)])]
     [attributes re-attributes keys]))
 
-(defn- field? [node]
+(defn- input? [node]
   (and (coll? node)
        (contains? (second node) :free-form/input)))
 
 (defn- js-event-value [event]
   (.-value (.-target event)))
 
-(defn- bind-field [values on-change node]
-  (if (not (field? node))
+(defn- bind-input [values on-change node]
+  (if (not (input? node))
     node
     (let [[attributes _ keys] (extract-attributes node :free-form/input)]
       (assoc node attributes-index (assoc attributes :default-value (get-in values keys)
@@ -107,6 +107,6 @@
   (let [errors (or errors {})]
     (->> form
          (prewalk expand-bootstrap-form)
-         (postwalk #(bind-field values on-change %))
+         (postwalk #(bind-input values on-change %))
          (postwalk #(bind-error-class errors %))
          (postwalk #(bind-error-messages errors %)))))
