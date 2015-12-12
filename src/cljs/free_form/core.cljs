@@ -56,18 +56,18 @@
                (map #(conj (get node 2) %) errors)))
         node))))
 
-(defn key->keys [m]
+(defn- key->keys [m]
   (if (contains? m :key)
     (if (contains? m :keys)
       (throw (js/Error. "key->keys expects a map with :key or :keys, not both"))
       (assoc m :keys [(:key m)]))
     m))
 
-(defn- bootstrap-horizontal-fields? [node]
+(defn- field? [node]
   (and (coll? node) (= :free-form/field (first node))))
 
 (defn- expand-bootstrap-horizontal-fields [node]
-  (if (bootstrap-horizontal-fields? node)
+  (if (field? node)
     (let [{:keys [type keys label placeholder]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
@@ -80,14 +80,33 @@
     node))
 
 (defn- expand-bootstrap-fields [node]
-  (throw (js/Error. "expand-bootstrap-fields not implemented yet")))
+  (if (field? node)
+    (let [{:keys [type keys label placeholder]} (key->keys (second node))
+          id (clojure.string/join "-" (map name keys))]
+      [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
+       [:label.control-label {:for id} label]
+       [:input.form-control {:free-form/input {:keys keys}
+                             :type            type
+                             :id              id
+                             :placeholder     placeholder}]])
+    node))
 
-(defn- expand-bootstrap-fields-inline [node]
-  (throw (js/Error. "expand-bootstrap-fields-inline not implemented yet")))
+(defn- expand-bootstrap-inline-fields [node]
+  (if (field? node)
+    (let [{:keys [type keys label placeholder]} (key->keys (second node))
+          id (clojure.string/join "-" (map name keys))]
+      [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
+       [:label.control-label {:for id} label]
+       " "
+       [:input.form-control {:free-form/input {:keys keys}
+                             :type            type
+                             :id              id
+                             :placeholder     placeholder}]])
+    node))
 
 (defn- bootstrap-form? [node]
-  (and (coll? node)
-       (= :form (first node))))
+  (= (get-in node [attributes-index :free-form/options :mode])
+     :bootstrap))
 
 (defn- bootstrap-form-horizontal? [node]
   (and (coll? node)
@@ -98,10 +117,11 @@
        (= :form.form-inline (first node))))
 
 (defn- expand-bootstrap-form [node]
-  (cond (bootstrap-form? node) (postwalk expand-bootstrap-fields node)
-        (bootstrap-form-horizontal? node) (postwalk expand-bootstrap-horizontal-fields node)
-        (bootstrap-form-inline? node) (postwalk expand-bootstrap-fields-inline node)
-        :else node))
+  (if (bootstrap-form? node)
+    (cond (bootstrap-form-horizontal? node) (postwalk expand-bootstrap-horizontal-fields node)
+          (bootstrap-form-inline? node) (postwalk expand-bootstrap-inline-fields node)
+          :else (postwalk expand-bootstrap-fields node))
+    node))
 
 (defn form [values errors on-change form]
   (let [errors (or errors {})]
