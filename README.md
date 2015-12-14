@@ -157,7 +157,7 @@ or [inline](http://free-form-examples.carouselapps.com/reagent/bootstrap-3-inlin
 
 ## Changelog
 
-### v0.2.0
+### v0.2.0 - 2015-12-14
 - Started Bootstrap 3 support.
 - Change API from ```:free-form/input``` to ```:free-form/input```.
 - Created example app to help test, exercise and develop the library: http://free-form-examples.carouselapps.com
