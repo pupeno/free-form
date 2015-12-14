@@ -1,6 +1,6 @@
 ;;;; Copyright © 2015 Carousel Apps, Ltd. All rights reserved.
 
-(defproject com.carouselapps/free-form "0.2.0"
+(defproject com.carouselapps/free-form "0.2.1-SNAPSHOT"
   :description "Library for building forms with Reagent or Re-frame."
   :url "https://carouselapps.com/free-form"
   :license {:name "Eclipse Public License"
