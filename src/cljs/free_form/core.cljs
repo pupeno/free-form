@@ -66,7 +66,7 @@
 (defn- field? [node]
   (and (coll? node) (= :free-form/field (first node))))
 
-(defn- expand-bootstrap-horizontal-fields [node]
+(defn- expand-bootstrap-3-horizontal-fields [node]
   (if (field? node)
     (let [{:keys [type keys label placeholder]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
@@ -79,7 +79,7 @@
         [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]]])
     node))
 
-(defn- expand-bootstrap-fields [node]
+(defn- expand-bootstrap-3-fields [node]
   (if (field? node)
     (let [{:keys [type keys label placeholder]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
@@ -91,7 +91,7 @@
                              :placeholder     placeholder}]])
     node))
 
-(defn- expand-bootstrap-inline-fields [node]
+(defn- expand-bootstrap-3-inline-fields [node]
   (if (field? node)
     (let [{:keys [type keys label placeholder]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
@@ -104,29 +104,29 @@
                              :placeholder     placeholder}]])
     node))
 
-(defn- bootstrap-form? [node]
+(defn- bootstrap-3-form? [node]
   (= (get-in node [attributes-index :free-form/options :mode])
-     :bootstrap))
+     :bootstrap-3))
 
-(defn- bootstrap-form-horizontal? [node]
+(defn- bootstrap-3-form-horizontal? [node]
   (and (coll? node)
        (= :form.form-horizontal (first node))))
 
-(defn- bootstrap-form-inline? [node]
+(defn- bootstrap-3-form-inline? [node]
   (and (coll? node)
        (= :form.form-inline (first node))))
 
-(defn- expand-bootstrap-form [node]
-  (if (bootstrap-form? node)
-    (cond (bootstrap-form-horizontal? node) (postwalk expand-bootstrap-horizontal-fields node)
-          (bootstrap-form-inline? node) (postwalk expand-bootstrap-inline-fields node)
-          :else (postwalk expand-bootstrap-fields node))
+(defn- expand-bootstrap-3-form [node]
+  (if (bootstrap-3-form? node)
+    (cond (bootstrap-3-form-horizontal? node) (postwalk expand-bootstrap-3-horizontal-fields node)
+          (bootstrap-3-form-inline? node) (postwalk expand-bootstrap-3-inline-fields node)
+          :else (postwalk expand-bootstrap-3-fields node))
     node))
 
 (defn form [values errors on-change form]
   (let [errors (or errors {})]
     (->> form
-         (prewalk expand-bootstrap-form)
+         (prewalk expand-bootstrap-3-form)
          (postwalk #(bind-input values on-change %))
          (postwalk #(bind-error-class errors %))
          (postwalk #(bind-error-messages errors %)))))
