@@ -5,7 +5,7 @@
 [![Join the chat at https://gitter.im/carouselapps/free-form](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/carouselapps/free-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A ClojureScript library to help building web forms with [Reagent](https://reagent-project.github.io/) and optionally
-[Re-frame](https://github.com/Day8/re-frame) (others are welcome too). The guiding principles behind [Free-form](https://carouselapps.com/free-form)
+[re-frame](https://github.com/Day8/re-frame) (others are welcome too). The guiding principles behind [Free-form](https://carouselapps.com/free-form)
 is that you are in control of both you data workflow as well as your markup. You can see the library in action in the
 [Free-form Examples app](http://free-form-examples.carouselapps.com).
 
@@ -46,7 +46,7 @@ to make this input to connect to the email we would change it to:
 ```
 
 [Reagent-forms](https://github.com/reagent-project/reagent-forms) was a big inspiration but the way it handles state was
-not ideal in a Re-frame scenario.
+not ideal in a re-frame scenario.
 
 ## Current state
 
@@ -99,7 +99,7 @@ There are three special keywords added:
 * ```:free-form/error-class``` will add a class if there's a validation error for the field. As with the previous one,  ```:key``` or ```:keys``` marks the field, and ```:error``` the class to be added in case of error.
 * ```:free-form/error-message``` adds error messages. If there are no error messages, the surrounding element, in this case ```:div.errors``` will not be output at all. The field to be read form the map of errors is specified by  ```:key``` or ```:keys```. Lastly, the element inside this element will be used to output each of the error messages, so this might end up looking like: ```[:div.error [:p.error "Password is too short"] [:p.error "Password must contain a symbol"]]```
 
-### Re-frame
+### re-frame
 
 When using Free-form with re-frame, the form is built in exactly the same way, but instead of having to code your own
 state management function, you can pass the name of the event to be triggered:
