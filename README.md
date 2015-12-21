@@ -97,7 +97,7 @@ The form is just your traditional Reagent template:
 There are three special keywords added:
 * ```:free-form/input``` marks the element as being an input and the passed key is to be used to connect to the value. As an alternative, you can pass a set of keys, as in: ```{:keys [:user :email]}```, as you do with the function ```get-in```.
 * ```:free-form/error-class``` will add a class if there's a validation error for the field. As with the previous one,  ```:key``` or ```:keys``` marks the field, and ```:error``` the class to be added in case of error.
-* ```:free-form/error-message``` adds error messages. If there are no error messages, the surrounding element, in this case ```:div.errors``` will not be output at all. The field to be read form the map of errors is specified by  ```:key``` or ```:keys```. Lastly, the element inside this element will be used to output each of the error messages, so this might end up looking like: ```[:div.error [:p.error "Password is too short"] [:p.error "Password must contain a symbol"]]```
+* ```:free-form/error-message``` adds error messages. If there are no error messages, the surrounding element, in this case ```:div.errors``` will not be output at all. The field to be read from the map of errors is specified by  ```:key``` or ```:keys```. Lastly, the element inside this element will be used to output each of the error messages, so this might end up looking like: ```[:div.error [:p.error "Password is too short"] [:p.error "Password must contain a symbol"]]```
 
 ### re-frame
 
