@@ -109,7 +109,15 @@ state management function, you can pass the name of the event to be triggered:
  [...]]
 ```
 
-And the library will dispatch ```[:update-state keys new-value]```. If you need to generate more involved events to
+And the library will dispatch ```[:update-state keys new-value]```. If you need to pass extra arguments to the handler,
+specify it as a vector.
+
+```clojure
+[free-form.re-frame/form @values @errors [:update :user]
+ [...]]
+```
+
+If you need to generate more involved events to
 dispatch, you can pass a function that will get the keys and the new value and generate the event to be dispatched. For
 example:
 
