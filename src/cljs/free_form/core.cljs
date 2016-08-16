@@ -66,16 +66,19 @@
 (defn- field? [node]
   (and (coll? node) (= :free-form/field (first node))))
 
+(defn- expand-bootstrap-3-input [id keys type placeholder]
+  [:input.form-control {:free-form/input {:keys keys}
+                        :type            type
+                        :id              id
+                        :placeholder     placeholder}])
+
 (defn- expand-bootstrap-3-horizontal-fields [node]
   (if (field? node)
     (let [{:keys [type keys label placeholder]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
        [:label.col-sm-2.control-label {:for id} label]
-       [:div.col-sm-10 [:input.form-control {:free-form/input {:keys keys}
-                                             :type            type
-                                             :id              id
-                                             :placeholder     placeholder}]
+       [:div.col-sm-10 (expand-bootstrap-3-input id keys type placeholder)
         [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]]])
     node))
 
@@ -85,10 +88,7 @@
           id (clojure.string/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
        [:label.control-label {:for id} label]
-       [:input.form-control {:free-form/input {:keys keys}
-                             :type            type
-                             :id              id
-                             :placeholder     placeholder}]])
+       (expand-bootstrap-3-input id keys type placeholder)])
     node))
 
 (defn- expand-bootstrap-3-inline-fields [node]
@@ -98,10 +98,7 @@
       [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
        [:label.control-label {:for id} label]
        " "
-       [:input.form-control {:free-form/input {:keys keys}
-                             :type            type
-                             :id              id
-                             :placeholder     placeholder}]])
+       (expand-bootstrap-3-input id keys type placeholder)])
     node))
 
 (defn- bootstrap-3-form? [node]
