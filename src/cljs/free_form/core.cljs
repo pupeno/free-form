@@ -1,7 +1,8 @@
 ;;;; Copyright © 2015, 2016 José Pablo Fernández Silva, All rights reserved.
 
 (ns free-form.core
-  (:require [clojure.walk :refer [postwalk prewalk]]))
+  (:require clojure.string
+            [clojure.walk :refer [postwalk prewalk]]))
 
 (def ^:private attributes-index 1)                          ; The second element in structure that represents an input is the attributes, as in :type, :key, etc.
 
