@@ -6,10 +6,10 @@
 
 (defn form [values errors event form]
   (let [re-frame-event-generator
-        (fn [ks value]
+        (fn [keys value]
           (let [event-v (cond
-                          (fn? event)     (event ks value)
-                          (vector? event) (conj event ks value)
-                          :else           [event ks value])]
+                          (fn? event) (event keys value)
+                          (vector? event) (conj event keys value)
+                          :else [event keys value])]
             (re-frame/dispatch event-v)))]
     [core/form values errors re-frame-event-generator form]))
