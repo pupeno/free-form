@@ -51,9 +51,7 @@ not ideal in a re-frame scenario.
 ## Current state
 
 This library is far from complete. The focus so far was in establishing how it should work and not attempt to provide a
-complete form solution. For example, there's no [support selects](https://github.com/pupeno/free-form/issues/3) or
-[text areas](https://github.com/pupeno/free-form/issues/4) but adding them should be easy. This is likely to be
-fixed soon but pull requests are welcome. Another important shortcoming is the [lack of tests](https://github.com/pupeno/free-form/issues/6).
+complete form solution. An important shortcoming is the [lack of tests](https://github.com/pupeno/free-form/issues/6).
 If you start using the library and find it's not flexible enough, please, get in touch. The goal is for it to be super
 flexible and useful in a wide range of situations.
 
@@ -157,6 +155,8 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Next version
 - Changed namespace from com.carouselapps to com.pupeno
+- Implemented selects.
+- Implemented text areas.
 
 ### v0.2.0 - 2015-12-14
 - Started Bootstrap 3 support.
