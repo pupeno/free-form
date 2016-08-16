@@ -153,7 +153,7 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Changelog
 
-## Next version
+### v0.3.0 - 2016-08-16
 - Changed namespace from com.carouselapps to com.pupeno
 - Implemented selects.
 - Implemented text areas.
