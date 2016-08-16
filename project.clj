@@ -1,4 +1,4 @@
-;;;; Copyright © 2015 Carousel Apps, Ltd. All rights reserved.
+;;;; Copyright © 2015, 2016 José Pablo Fernández Silva, All rights reserved.
 
 (defproject com.carouselapps/free-form "0.3.0-SNAPSHOT"
   :description "Library for building forms with Reagent or Re-frame."
