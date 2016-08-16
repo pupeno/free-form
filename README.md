@@ -2,7 +2,6 @@
 
 [![Code at GitHub](https://img.shields.io/badge/code-github-green.svg)](https://github.com/pupeno/free-form)
 [![Clojars](https://img.shields.io/clojars/v/com.pupeno/free-form.svg)](https://clojars.org/com.pupeno/free-form)
-[![Join the chat at https://gitter.im/pupeno/free-form](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pupeno/free-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A ClojureScript library to help building web forms with [Reagent](https://reagent-project.github.io/) and optionally
 [re-frame](https://github.com/Day8/re-frame) (others are welcome too). The guiding principles behind [Free-form](https://github.com/pupeno/free-form)
