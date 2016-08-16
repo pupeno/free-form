@@ -67,17 +67,20 @@
   (and (coll? node) (= :free-form/field (first node))))
 
 (defn- expand-bootstrap-3-input [id keys type placeholder options]
-  (if (= type :select)
-    [:select.form-control {:free-form/input {:keys keys}
-                           :type            type
-                           :id              id
-                           :placeholder     placeholder}
-     (letfn [(generate-option [[value name]]
-               (if (sequential? name)
-                 ^{:key value} [:optgroup {:label value}
-                                (map generate-option (partition 2 name))]
-                 ^{:key value} [:option {:value value} name]))]
-       (map generate-option (partition 2 options)))]
+  (case type
+    :select [:select.form-control {:free-form/input {:keys keys}
+                                   :type            type
+                                   :id              id
+                                   :placeholder     placeholder}
+             (letfn [(generate-option [[value name]]
+                       (if (sequential? name)
+                         ^{:key value} [:optgroup {:label value}
+                                        (map generate-option (partition 2 name))]
+                         ^{:key value} [:option {:value value} name]))]
+               (map generate-option (partition 2 options)))]
+    :textarea [:textarea.form-control {:free-form/input {:keys keys}
+                                       :type            type
+                                       :id              id}]
     [:input.form-control {:free-form/input {:keys keys}
                           :type            type
                           :id              id
