@@ -1,7 +1,7 @@
 # Free-form
 
-[![Clojars](https://img.shields.io/clojars/v/com.carouselapps/free-form.svg)](https://clojars.org/com.carouselapps/free-form)
 [![Code at GitHub](https://img.shields.io/badge/code-github-green.svg)](https://github.com/pupeno/free-form)
+[![Clojars](https://img.shields.io/clojars/v/com.pupeno/free-form.svg)](https://clojars.org/com.pupeno/free-form)
 [![Join the chat at https://gitter.im/pupeno/free-form](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pupeno/free-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A ClojureScript library to help building web forms with [Reagent](https://reagent-project.github.io/) and optionally
@@ -61,7 +61,7 @@ flexible and useful in a wide range of situations.
 
 First, you have to include Free-form in your project:
 
-[![Clojars Project](http://clojars.org/com.carouselapps/free-form/latest-version.svg)](http://clojars.org/com.carouselapps/free-form)
+[![Clojars Project](http://clojars.org/com.pupeno/free-form/latest-version.svg)](http://clojars.org/com.pupeno/free-form)
 
 To activate a form you call ```free-form.core/form``` passing the set of values to display when the form is shown for
 the first time, the set of errors to display, a callback function to receive changes to the state and the form itself.
@@ -155,6 +155,9 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Changelog
 
+## Next version
+- Changed namespace from com.carouselapps to com.pupeno
+
 ### v0.2.0 - 2015-12-14
 - Started Bootstrap 3 support.
 - Change API from ```:free-form/field``` to ```:free-form/input```.
@@ -170,6 +173,6 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 This library has been extracted from the project [Ninja Tools](http://tools.screensaver.ninja).
 
-Copyright © 2015 Carousel Apps, Ltd. All rights reserved.
+Copyright © 2015, 2016 José Pablo Fernández Silva, All rights reserved.
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
