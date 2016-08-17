@@ -103,7 +103,8 @@
           id (clojure.string/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
        [:label.control-label {:for id} label]
-       (expand-bootstrap-3-input id keys type placeholder options)])
+       (expand-bootstrap-3-input id keys type placeholder options)
+       [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]])
     node))
 
 (defn- expand-bootstrap-3-inline-fields [node]
@@ -113,7 +114,9 @@
       [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
        [:label.control-label {:for id} label]
        " "
-       (expand-bootstrap-3-input id keys type placeholder options)])
+       (expand-bootstrap-3-input id keys type placeholder options)
+       " "
+       [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]])
     node))
 
 (defn- bootstrap-3-form? [node]
