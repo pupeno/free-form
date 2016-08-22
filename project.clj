@@ -11,7 +11,7 @@
   :scm {:name "git"
         :url  "https://github.com/pupeno/free-form"}
 
-  :dependencies [#_[org.clojure/clojurescript "1.7.48"]
-                 #_[org.clojure/clojure "1.6.0"]]
+  :dependencies [[org.clojure/clojurescript "1.9.225" :scope "provided"]
+                 [org.clojure/clojure "1.8.0" :scope "provided"]]
 
   :source-paths ["src/cljs"])
