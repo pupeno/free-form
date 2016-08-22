@@ -157,6 +157,9 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 - Implemented selects.
 - Implemented text areas.
 
+### v0.2.1 - 2016-08-22
+- Changed the metadata of the library to point to the new namespace.
+
 ### v0.2.0 - 2015-12-14
 - Started Bootstrap 3 support.
 - Change API from ```:free-form/field``` to ```:free-form/input```.
