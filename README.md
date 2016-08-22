@@ -152,6 +152,9 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Changelog
 
+### Next version.
+- Allow marking a field as invalid when another one is invalid with :extra-keys
+
 ### v0.3.0 - 2016-08-16
 - Changed namespace from com.carouselapps to com.pupeno
 - Implemented selects.
