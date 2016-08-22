@@ -1,6 +1,6 @@
 ;;;; Copyright © 2015 Carousel Apps, Ltd. All rights reserved.
 
-(defproject com.carouselapps/free-form "0.2.1-SNAPSHOT"
+(defproject com.carouselapps/free-form "0.2.1"
   :description "Library for building forms with Reagent or Re-frame. This library changed namespace to com.pupeno/free-form"
   :url "https://github.com/pupeno/free-form"
   :license {:name "Eclipse Public License"
