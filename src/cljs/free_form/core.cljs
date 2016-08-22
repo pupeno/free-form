@@ -38,7 +38,7 @@
     node
     (let [[attributes re-attributes keys] (extract-attributes node :free-form/error-class)]
       (assoc node attributes-index
-                  (if (nil? (get-in errors keys))
+                  (if (not-any? #(get-in errors %) (conj (:extra-keys re-attributes) keys))
                     attributes
                     (update attributes :class #(str (or (:error re-attributes) "error") %)))))))
 
@@ -89,9 +89,9 @@
 
 (defn- expand-bootstrap-3-horizontal-fields [node]
   (if (field? node)
-    (let [{:keys [type keys label placeholder options]} (key->keys (second node))
+    (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
-      [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
+      [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
        [:label.col-sm-2.control-label {:for id} label]
        [:div.col-sm-10 (expand-bootstrap-3-input id keys type placeholder options)
         [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]]])
@@ -99,9 +99,9 @@
 
 (defn- expand-bootstrap-3-fields [node]
   (if (field? node)
-    (let [{:keys [type keys label placeholder options]} (key->keys (second node))
+    (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
-      [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
+      [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
        [:label.control-label {:for id} label]
        (expand-bootstrap-3-input id keys type placeholder options)
        [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]])
@@ -109,9 +109,9 @@
 
 (defn- expand-bootstrap-3-inline-fields [node]
   (if (field? node)
-    (let [{:keys [type keys label placeholder options]} (key->keys (second node))
+    (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
           id (clojure.string/join "-" (map name keys))]
-      [:div.form-group {:free-form/error-class {:keys keys :error "has-error"}}
+      [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
        [:label.control-label {:for id} label]
        " "
        (expand-bootstrap-3-input id keys type placeholder options)
