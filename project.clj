@@ -12,6 +12,16 @@
         :url  "https://github.com/pupeno/free-form"}
 
   :dependencies [[org.clojure/clojurescript "1.9.225" :scope "provided"]
-                 [org.clojure/clojure "1.8.0" :scope "provided"]]
+                 [org.clojure/clojure "1.8.0" :scope "provided"]
+                 [reagent "0.5.1" :scope "provided"]
+                 [re-frame "0.7.0" :scope "provided"]
+                 [doo "0.1.7" :scope "provided"]]
+  :plugins [[lein-cljsbuild "1.1.4"]
+            [lein-doo "0.1.7"]]
+  :doo {:build "test"}
 
-  :source-paths ["src/cljs"])
+  :cljsbuild {:builds [{:id           "test"
+                        :source-paths ["src/cljs" "test/cljs"]
+                        :compiler     {:main          free-form.runner
+                                       :output-to     "out/free_form.js"
+                                       :optimizations :none}}]})
