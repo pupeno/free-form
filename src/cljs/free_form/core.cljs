@@ -139,10 +139,18 @@
           :else (postwalk expand-bootstrap-3-fields node))
     node))
 
+(defn- warn-of-leftovers [node]
+  (let [attrs (get node attributes-index)]
+    (when (and (map? attrs)
+               (some #(= "free-form" (namespace %)) (keys attrs)))
+      (js/console.error "There are free-form-looking leftovers on" (pr-str node))))
+  node)
+
 (defn form [values errors on-change form]
   (let [errors (or errors {})]
     (->> form
          (prewalk expand-bootstrap-3-form)
          (postwalk #(bind-input values on-change %))
          (postwalk #(bind-error-class errors %))
-         (postwalk #(bind-error-messages errors %)))))
+         (postwalk #(bind-error-messages errors %))
+         (postwalk #(warn-of-leftovers %)))))
