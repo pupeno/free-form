@@ -90,7 +90,7 @@
                                 plain-reagent-form-template))]
         (is (= generated-input
                [:form {:noValidate true}
-                [:div.errors {:free-form/error-message {:key :-general}} [:p.error]]
+                nil
                 [:div.field {}
                  [:label {:for :text} "Text"]
                  [:input.form-control {:type          :text
@@ -98,7 +98,7 @@
                                        :placeholder   "placeholder"
                                        :default-value nil
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :text}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :email} "Email"]
                  [:input.form-control {:type          :email
@@ -106,14 +106,14 @@
                                        :placeholder   "placeholder@example.com"
                                        :default-value nil
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :email}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :password} "Password"]
                  [:input.form-control {:type          :password
                                        :id            :password
                                        :default-value nil
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :password}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :select} "Select"]
                  [:select.form-control {:type          :select
@@ -125,7 +125,7 @@
                   [:option {:value :cat} "Cat"]
                   [:option {:value :squirrel} "Squirrel"]
                   [:option {:value :giraffe} "Giraffe"]]
-                 [:div.errors {:free-form/error-message {:key :select}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :select} "Select with groups"]
                  [:select.form-control {:type          :select
@@ -143,13 +143,13 @@
                    [:option {:value :b} "B"]
                    [:option {:value :c} "C"]
                    [:option {:value :d} "D"]]]
-                 [:div.errors {:free-form/error-message {:key :select-with-group}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :text-area} "Text area"]
                  [:textarea.form-control {:id            :textarea
                                           :default-value nil
                                           :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :textarea}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :text} "Text with deep keys"]
                  [:input.form-control {:type          :text
@@ -157,7 +157,7 @@
                                        :placeholder   "placeholder"
                                        :default-value nil
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:keys [:t :e :x :t]}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
                  [:input.form-control {:type          :text
@@ -165,7 +165,7 @@
                                        :placeholder   "This will be marked as a validation error also when Text and General have validation errors."
                                        :default-value nil
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :text-with-extra-validation-errors}} [:p.error]]]
+                 nil]
                 [:button "Button"]]))))
 
     (testing "generation with initial data"
@@ -181,7 +181,7 @@
                                 plain-reagent-form-template))]
         (is (= generated-input
                [:form {:noValidate true}
-                [:div.errors {:free-form/error-message {:key :-general}} [:p.error]]
+                nil
                 [:div.field {}
                  [:label {:for :text} "Text"]
                  [:input.form-control {:type          :text
@@ -189,7 +189,7 @@
                                        :placeholder   "placeholder"
                                        :default-value "Text value"
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :text}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :email} "Email"]
                  [:input.form-control {:type          :email
@@ -197,13 +197,13 @@
                                        :placeholder   "placeholder@example.com"
                                        :default-value "Email value"
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :email}} [:p.error]]]
+                 nil]
                 [:div.field {} [:label {:for :password} "Password"]
                  [:input.form-control {:type          :password
                                        :id            :password
                                        :default-value "Password value"
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :password}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :select} "Select"]
                  [:select.form-control {:type          :select
@@ -215,7 +215,7 @@
                   [:option {:value :cat} "Cat"]
                   [:option {:value :squirrel} "Squirrel"]
                   [:option {:value :giraffe} "Giraffe"]]
-                 [:div.errors {:free-form/error-message {:key :select}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :select} "Select with groups"]
                  [:select.form-control {:type          :select
@@ -233,13 +233,13 @@
                    [:option {:value :b} "B"]
                    [:option {:value :c} "C"]
                    [:option {:value :d} "D"]]]
-                 [:div.errors {:free-form/error-message {:key :select-with-group}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :text-area} "Text area"]
                  [:textarea.form-control {:id            :textarea
                                           :default-value "Textarea value"
                                           :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :textarea}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :text} "Text with deep keys"]
                  [:input.form-control {:type          :text
@@ -247,7 +247,7 @@
                                        :placeholder   "placeholder"
                                        :default-value "Text with deep keys value"
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:keys [:t :e :x :t]}} [:p.error]]]
+                 nil]
                 [:div.field {}
                  [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
                  [:input.form-control {:type          :text
@@ -255,7 +255,7 @@
                                        :placeholder   "This will be marked as a validation error also when Text and General have validation errors."
                                        :default-value nil
                                        :on-change     :was-function}]
-                 [:div.errors {:free-form/error-message {:key :text-with-extra-validation-errors}} [:p.error]]]
+                 nil]
                 [:button "Button"]]))))))
 
 
