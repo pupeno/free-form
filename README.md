@@ -153,8 +153,14 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Changelog
 
-### Next version.
-- Allow marking a field as invalid when another one is invalid with :extra-keys
+### v0.4.0 - 2016-10-24
+- Tested Free-form with re-frame 0.8.0 and Reagent 0.6.0.
+- Allow marking a field as invalid when another one is invalid with :extra-keys.
+- Added error messages to Bootstrap inline and horizontal forms.
+- Correctly specify dependencies on Clojure and ClojureScript to avoid fixing to a single version.
+- When there's no validation error, don't return the form template (invalid HTML), return nil instead.
+- After a form with Bootstrap has been processed, remove the option to trigger that processing (it's invalid HTML).  
+- Show a JavaScript console error if there are any Free-form leftovers after all processing is done.
 
 ### v0.3.0 - 2016-08-16
 - Changed namespace from com.carouselapps to com.pupeno
