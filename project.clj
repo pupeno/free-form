@@ -11,10 +11,10 @@
   :scm {:name "git"
         :url  "https://github.com/pupeno/free-form"}
 
-  :dependencies [[org.clojure/clojurescript "1.9.225" :scope "provided"]
+  :dependencies [[org.clojure/clojurescript "1.9.293" :scope "provided"]
                  [org.clojure/clojure "1.8.0" :scope "provided"]
-                 [reagent "0.5.1" :scope "provided"]
-                 [re-frame "0.7.0" :scope "provided"]
+                 [reagent "0.6.0" :scope "provided"]
+                 [re-frame "0.8.0" :scope "provided"]
                  [doo "0.1.7" :scope "provided"]]
   :plugins [[lein-cljsbuild "1.1.4"]
             [lein-doo "0.1.7"]]
