@@ -132,11 +132,18 @@
   (and (coll? node)
        (= :form.form-inline (first node))))
 
+(defn- remove-free-form-attribute [node attr-location attr-name]
+  (let [node (update-in node [attributes-index attr-location] dissoc attr-name)]
+    (if (empty? (get-in node [attributes-index attr-location]))
+      (update-in node [attributes-index] dissoc attr-location)
+      node)))
+
 (defn- expand-bootstrap-3-form [node]
   (if (bootstrap-3-form? node)
-    (cond (bootstrap-3-form-horizontal? node) (postwalk expand-bootstrap-3-horizontal-fields node)
-          (bootstrap-3-form-inline? node) (postwalk expand-bootstrap-3-inline-fields node)
-          :else (postwalk expand-bootstrap-3-fields node))
+    (-> (cond (bootstrap-3-form-horizontal? node) (postwalk expand-bootstrap-3-horizontal-fields node)
+              (bootstrap-3-form-inline? node) (postwalk expand-bootstrap-3-inline-fields node)
+              :else (postwalk expand-bootstrap-3-fields node))
+        (remove-free-form-attribute :free-form/options :mode))
     node))
 
 (defn- warn-of-leftovers [node]
