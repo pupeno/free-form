@@ -16,3 +16,6 @@ pom.xml.asc
 .idea/tasks.xml
 .idea/dictionaries
 .idea/libraries
+.idea/replstate.xml
+*.ipr
+*.iws
