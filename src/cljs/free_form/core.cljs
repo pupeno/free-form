@@ -55,7 +55,7 @@
         (vec (concat
                (drop-last (assoc node attributes-index attributes))
                (map #(conj (get node 2) %) errors)))
-        node))))
+        nil))))
 
 (defn- key->keys [m]
   (if (contains? m :key)
