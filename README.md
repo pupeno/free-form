@@ -186,8 +186,6 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## License
 
-This library has been extracted from the project [Ninja Tools](http://tools.screensaver.ninja).
-
-Copyright © 2015, 2016 José Pablo Fernández Silva, All rights reserved.
+Copyright © 2015, 2016 José Pablo Fernández Silva.
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
