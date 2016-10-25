@@ -18,11 +18,11 @@
                  [doo "0.1.7" :scope "provided"]]
   :plugins [[lein-cljsbuild "1.1.4"]
             [lein-doo "0.1.7"]]
-  :doo {:build "test"}
 
   :source-paths ["src/cljs"]
-  :cljsbuild {:builds [{:id           "test"
-                        :source-paths ["src/cljs" "test/cljs"]
-                        :compiler     {:main          free-form.runner
-                                       :output-to     "out/free_form.js"
-                                       :optimizations :none}}]})
+  :cljsbuild {:builds {:test {:source-paths ["src/cljs" "test/cljs"]
+                              :compiler     {:main          free-form.runner
+                                             :output-to     "out/free_form.js"
+                                             :optimizations :none}}}}
+
+  :doo {:build "test"})
