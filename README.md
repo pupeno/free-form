@@ -153,6 +153,9 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Changelog
 
+### v0.4.1 - 2016-10-25
+- Added the sources directory to the project.clj so that the library is correctly packaged.
+
 ### v0.4.0 - 2016-10-24
 - Tested Free-form with re-frame 0.8.0 and Reagent 0.6.0.
 - Allow marking a field as invalid when another one is invalid with :extra-keys.
