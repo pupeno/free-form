@@ -20,6 +20,7 @@
             [lein-doo "0.1.7"]]
   :doo {:build "test"}
 
+  :source-paths ["src/cljs"]
   :cljsbuild {:builds [{:id           "test"
                         :source-paths ["src/cljs" "test/cljs"]
                         :compiler     {:main          free-form.runner
