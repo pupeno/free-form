@@ -153,6 +153,9 @@ or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) for
 
 ## Changelog
 
+### v0.4.2 - 2016-11-12
+- Make all inputs controlled so changes can come from within our from outside.
+
 ### v0.4.1 - 2016-10-25
 - Added the sources directory to the project.clj so that the library is correctly packaged.
 
