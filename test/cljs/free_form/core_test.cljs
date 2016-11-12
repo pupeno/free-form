@@ -93,33 +93,33 @@
                 nil
                 [:div.field {}
                  [:label {:for :text} "Text"]
-                 [:input.form-control {:type          :text
-                                       :id            :text
-                                       :placeholder   "placeholder"
-                                       :default-value nil
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :text
+                                       :id          :text
+                                       :placeholder "placeholder"
+                                       :value       ""
+                                       :on-change   :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :email} "Email"]
-                 [:input.form-control {:type          :email
-                                       :id            :email
-                                       :placeholder   "placeholder@example.com"
-                                       :default-value nil
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :email
+                                       :id          :email
+                                       :placeholder "placeholder@example.com"
+                                       :value       ""
+                                       :on-change   :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :password} "Password"]
-                 [:input.form-control {:type          :password
-                                       :id            :password
-                                       :default-value nil
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type      :password
+                                       :id        :password
+                                       :value     ""
+                                       :on-change :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :select} "Select"]
-                 [:select.form-control {:type          :select
-                                        :id            :select
-                                        :default-value nil
-                                        :on-change     :was-function}
+                 [:select.form-control {:type      :select
+                                        :id        :select
+                                        :value     ""
+                                        :on-change :was-function}
                   [:option]
                   [:option {:value :dog} "Dog"]
                   [:option {:value :cat} "Cat"]
@@ -128,10 +128,10 @@
                  nil]
                 [:div.field {}
                  [:label {:for :select} "Select with groups"]
-                 [:select.form-control {:type          :select
-                                        :id            :select-with-group
-                                        :default-value nil
-                                        :on-change     :was-function}
+                 [:select.form-control {:type      :select
+                                        :id        :select-with-group
+                                        :value     ""
+                                        :on-change :was-function}
                   [:option]
                   [:optgroup {:label "Numbers"}
                    [:option {:value :one} "One"]
@@ -146,25 +146,25 @@
                  nil]
                 [:div.field {}
                  [:label {:for :text-area} "Text area"]
-                 [:textarea.form-control {:id            :textarea
-                                          :default-value nil
-                                          :on-change     :was-function}]
+                 [:textarea.form-control {:id        :textarea
+                                          :value     ""
+                                          :on-change :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :text} "Text with deep keys"]
-                 [:input.form-control {:type          :text
-                                       :id            :text
-                                       :placeholder   "placeholder"
-                                       :default-value nil
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :text
+                                       :id          :text
+                                       :placeholder "placeholder"
+                                       :value       ""
+                                       :on-change   :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
-                 [:input.form-control {:type          :text
-                                       :id            :text-with-extra-validation-errors
-                                       :placeholder   "This will be marked as a validation error also when Text and General have validation errors."
-                                       :default-value nil
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :text
+                                       :id          :text-with-extra-validation-errors
+                                       :placeholder "This will be marked as a validation error also when Text and General have validation errors."
+                                       :value       ""
+                                       :on-change   :was-function}]
                  nil]
                 [:button "Button"]]))))
 
@@ -184,32 +184,32 @@
                 nil
                 [:div.field {}
                  [:label {:for :text} "Text"]
-                 [:input.form-control {:type          :text
-                                       :id            :text
-                                       :placeholder   "placeholder"
-                                       :default-value "Text value"
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :text
+                                       :id          :text
+                                       :placeholder "placeholder"
+                                       :value       "Text value"
+                                       :on-change   :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :email} "Email"]
-                 [:input.form-control {:type          :email
-                                       :id            :email
-                                       :placeholder   "placeholder@example.com"
-                                       :default-value "Email value"
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :email
+                                       :id          :email
+                                       :placeholder "placeholder@example.com"
+                                       :value       "Email value"
+                                       :on-change   :was-function}]
                  nil]
                 [:div.field {} [:label {:for :password} "Password"]
-                 [:input.form-control {:type          :password
-                                       :id            :password
-                                       :default-value "Password value"
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type      :password
+                                       :id        :password
+                                       :value     "Password value"
+                                       :on-change :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :select} "Select"]
-                 [:select.form-control {:type          :select
-                                        :id            :select
-                                        :default-value nil
-                                        :on-change     :was-function}
+                 [:select.form-control {:type      :select
+                                        :id        :select
+                                        :value     ""
+                                        :on-change :was-function}
                   [:option]
                   [:option {:value :dog} "Dog"]
                   [:option {:value :cat} "Cat"]
@@ -218,10 +218,10 @@
                  nil]
                 [:div.field {}
                  [:label {:for :select} "Select with groups"]
-                 [:select.form-control {:type          :select
-                                        :id            :select-with-group
-                                        :default-value nil
-                                        :on-change     :was-function}
+                 [:select.form-control {:type      :select
+                                        :id        :select-with-group
+                                        :value     ""
+                                        :on-change :was-function}
                   [:option]
                   [:optgroup {:label "Numbers"}
                    [:option {:value :one} "One"]
@@ -236,25 +236,25 @@
                  nil]
                 [:div.field {}
                  [:label {:for :text-area} "Text area"]
-                 [:textarea.form-control {:id            :textarea
-                                          :default-value "Textarea value"
-                                          :on-change     :was-function}]
+                 [:textarea.form-control {:id        :textarea
+                                          :value     "Textarea value"
+                                          :on-change :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :text} "Text with deep keys"]
-                 [:input.form-control {:type          :text
-                                       :id            :text
-                                       :placeholder   "placeholder"
-                                       :default-value "Text with deep keys value"
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :text
+                                       :id          :text
+                                       :placeholder "placeholder"
+                                       :value       "Text with deep keys value"
+                                       :on-change   :was-function}]
                  nil]
                 [:div.field {}
                  [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
-                 [:input.form-control {:type          :text
-                                       :id            :text-with-extra-validation-errors
-                                       :placeholder   "This will be marked as a validation error also when Text and General have validation errors."
-                                       :default-value nil
-                                       :on-change     :was-function}]
+                 [:input.form-control {:type        :text
+                                       :id          :text-with-extra-validation-errors
+                                       :placeholder "This will be marked as a validation error also when Text and General have validation errors."
+                                       :value       ""
+                                       :on-change   :was-function}]
                  nil]
                 [:button "Button"]]))))))
 
