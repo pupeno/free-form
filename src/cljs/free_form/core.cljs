@@ -24,7 +24,7 @@
   (if (not (input? node))
     node
     (let [[attributes _ keys] (extract-attributes node :free-form/input)]
-      (assoc node attributes-index (assoc attributes :default-value (get-in values keys)
+      (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
                                                      :on-change #(on-change keys (js-event-value %)))))))
 
 (defn- error-class?
