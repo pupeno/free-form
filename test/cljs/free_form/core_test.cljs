@@ -1,4 +1,4 @@
-;;;; Copyright © 2015 2016 José Pablo Fernández Silva All rights reserved.
+;;;; Copyright © 2015-2017 José Pablo Fernández Silva. All rights reserved.
 
 (ns free-form.core-test
   (:require [clojure.test :refer [deftest testing is]]
