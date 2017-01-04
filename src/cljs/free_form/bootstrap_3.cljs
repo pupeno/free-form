@@ -1,4 +1,4 @@
-;;;; Copyright © 2017 José Pablo Fernández Silva. All rights reserved.
+;;;; Copyright © 2017 José Pablo Fernández Silva
 
 (ns free-form.bootstrap-3
   (:require [clojure.walk :refer [postwalk prewalk]]

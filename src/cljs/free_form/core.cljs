@@ -1,4 +1,4 @@
-;;;; Copyright © 2015-2017 José Pablo Fernández Silva. All rights reserved.
+;;;; Copyright © 2015-2017 José Pablo Fernández Silva
 
 (ns free-form.core
   (:require free-form.bootstrap-3                           ; Just to make the bootstrap-3 extension automatically available

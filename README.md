@@ -249,6 +249,6 @@ is not provided by default, so, you need to require the file to use it.
 
 ## License
 
-Copyright © 2015-2017 José Pablo Fernández Silva.
+Copyright © 2015-2017 José Pablo Fernández Silva
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
