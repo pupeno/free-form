@@ -1,10 +1,12 @@
 ;;;; Copyright © 2015-2017 José Pablo Fernández Silva. All rights reserved.
 
 (ns free-form.core
-  (:require clojure.string
-            [clojure.walk :refer [postwalk prewalk]]))
-
-(def ^:private attributes-index 1)                          ; The second element in structure that represents an input is the attributes, as in :type, :key, etc.
+  (:require free-form.bootstrap-3                           ; Just to make the bootstrap-3 extension automatically available
+            free-form.debug                                 ; Just to make the debug extension automatically available
+            clojure.string
+            [clojure.walk :refer [postwalk prewalk]]
+            [free-form.extension :as extension]
+            [free-form.util :refer [field? key->keys attributes-index]]))
 
 (defn- extract-attributes [node key]
   (let [attributes (get node attributes-index)
@@ -57,95 +59,6 @@
                (map #(conj (get node 2) %) errors)))
         nil))))
 
-(defn- key->keys [m]
-  (if (contains? m :key)
-    (if (contains? m :keys)
-      (throw (js/Error. "key->keys expects a map with :key or :keys, not both"))
-      (assoc m :keys [(:key m)]))
-    m))
-
-(defn- field? [node]
-  (and (coll? node) (= :free-form/field (first node))))
-
-(defn- expand-bootstrap-3-input [id keys type placeholder options]
-  (case type
-    :select [:select.form-control {:free-form/input {:keys keys}
-                                   :type            type
-                                   :id              id
-                                   :placeholder     placeholder}
-             (letfn [(generate-option [[value name]]
-                       (if (sequential? name)
-                         ^{:key value} [:optgroup {:label value}
-                                        (map generate-option (partition 2 name))]
-                         ^{:key value} [:option {:value value} name]))]
-               (map generate-option (partition 2 options)))]
-    :textarea [:textarea.form-control {:free-form/input {:keys keys}
-                                       :type            type
-                                       :id              id}]
-    [:input.form-control {:free-form/input {:keys keys}
-                          :type            type
-                          :id              id
-                          :placeholder     placeholder}]))
-
-(defn- expand-bootstrap-3-fields [node]
-  (if (field? node)
-    (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
-          id (clojure.string/join "-" (map name keys))]
-      [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
-       [:label.control-label {:for id} label]
-       (expand-bootstrap-3-input id keys type placeholder options)
-       [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]])
-    node))
-
-(defn- expand-bootstrap-3-horizontal-fields [node]
-  (if (field? node)
-    (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
-          id (clojure.string/join "-" (map name keys))]
-      [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
-       [:label.col-sm-2.control-label {:for id} label]
-       [:div.col-sm-10 (expand-bootstrap-3-input id keys type placeholder options)
-        [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]]])
-    node))
-
-
-(defn- expand-bootstrap-3-inline-fields [node]
-  (if (field? node)
-    (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
-          id (clojure.string/join "-" (map name keys))]
-      [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
-       [:label.control-label {:for id} label]
-       " "
-       (expand-bootstrap-3-input id keys type placeholder options)
-       " "
-       [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]])
-    node))
-
-(defn- bootstrap-3-form? [node]
-  (= (get-in node [attributes-index :free-form/options :mode])
-     :bootstrap-3))
-
-(defn- bootstrap-3-form-horizontal? [node]
-  (and (coll? node)
-       (= :form.form-horizontal (first node))))
-
-(defn- bootstrap-3-form-inline? [node]
-  (and (coll? node)
-       (= :form.form-inline (first node))))
-
-(defn- remove-free-form-attribute [node attr-location attr-name]
-  (let [node (update-in node [attributes-index attr-location] dissoc attr-name)]
-    (if (empty? (get-in node [attributes-index attr-location]))
-      (update-in node [attributes-index] dissoc attr-location)
-      node)))
-
-(defn- expand-bootstrap-3-form [node]
-  (if (bootstrap-3-form? node)
-    (-> (cond (bootstrap-3-form-horizontal? node) (postwalk expand-bootstrap-3-horizontal-fields node)
-              (bootstrap-3-form-inline? node) (postwalk expand-bootstrap-3-inline-fields node)
-              :else (postwalk expand-bootstrap-3-fields node))
-        (remove-free-form-attribute :free-form/options :mode))
-    node))
-
 (defn- warn-of-leftovers [node]
   (let [attrs (get node attributes-index)]
     (when (and (map? attrs)
@@ -153,11 +66,16 @@
       (js/console.error "There are free-form-looking leftovers on" (pr-str node))))
   node)
 
-(defn form [values errors on-change form]
-  (let [errors (or errors {})]
-    (->> form
-         (prewalk expand-bootstrap-3-form)
-         (postwalk #(bind-input values on-change %))
-         (postwalk #(bind-error-class errors %))
-         (postwalk #(bind-error-messages errors %))
-         (postwalk #(warn-of-leftovers %)))))
+(defn form
+  ([values errors on-change html]
+   (form values errors on-change [] html))
+  ([values errors on-change extensions html]
+   (let [errors (or errors {})
+         extensions (if (sequential? extensions) extensions [extensions])
+         inner-fn (fn [html]
+                            (->> html
+                                 (postwalk #(bind-input values on-change %))
+                                 (postwalk #(bind-error-class errors %))
+                                 (postwalk #(bind-error-messages errors %))))]
+     (postwalk #(warn-of-leftovers %)
+               ((reduce #(extension/extension %2 %1) inner-fn extensions) html)))))

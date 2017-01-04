@@ -10,12 +10,10 @@ is that you are in control of both you data workflow as well as your markup. You
 [Free-form Examples app](http://free-form-examples.pupeno.com).
 
 Free-form doesn't force any markup on you and thus creating your own is a first-class approach. To avoid code
-duplication, shortcuts are and will be offered for various patterns, but they are just shortcut. For example, you may be
-using the bootstrap-3 shortcuts to succinctly generate a [Boostrap form](http://getbootstrap.com/css/#forms) but there's
-always one or two fields that just need some special treatment. Stepping outside of the Bootstrap path and going custom
-with Free-form is not an afterthought but a well supported technique. For example, this won't be using an internal API
-that might change without warning, it's using the same API bootstrap-3 is using and using it directly is fine. In the
-future, we might want to provide some sort of [pluggable system for different styles of templates](https://github.com/pupeno/free-form/issues/2).
+duplication there's an extension system that allows you to write forms in a very succinct way. A Bootstrap 3 extension
+comes with Free form but adding more is not hard. One of the advantages of these mechanism is that when you have a
+couple of fields that behave differently and need their own markup, you can still use a first class API and enjoy the
+advantage of value handling, validation errors and everything Free form has to offer.
 
 Free-form doesn't handle state for you. You need to decide how to handle state. Free-form comes with a re-frame module
 that helps you plug your form into the re-frame state. If you use the Reagent core you can handle state anyway you want.
@@ -124,34 +122,96 @@ example:
  [...]]
 ```
 
-### Bootstrap 3
+### Extensions
+
+There's a fourth optional argument to specify one or more extensions to be applied to the form. For example, with only
+one extension called bootstrap-3:
+
+```clojure
+[free-form.core/form @values @errors save-state :bootstrap-3
+ [...]]
+````
+
+or with multiple:
+
+```clojure
+[free-form.core/form @values @errors save-state [:bootstrap-3 :debug]
+ [...]]
+````
+
+Extensions essentially wrap the form and thus, order is important and they can be provided more than once. For example:
+
+```clojure
+[free-form.core/form @values @errors save-state [:debug :bootstrap-3 :debug]
+ [...]]
+````
+
+would help you see what the Bootstrap 3 extension is doing.
+
+Extensions are implemented by adding a method to the multi-method free-form.extension/extension. This method will get
+the name of the extension and the function that process the form. This function gets the unprocessed html markup and
+returns the processed html structure. The extension should return a function that does essentially the same plus
+whatever the extension wants to do. This is a system similar to middlewares found in many libraries. For example:
+
+```clojure
+(defmethod free-form.extension/extension :extension-name [_extension-name inner-fn]
+  (fn [html]
+    (do-something-else (inner-fn (do-something html)))))
+```
+
+do-something would pre-process the raw structure and do-something-else would post-process the structure after all inner
+extensions and the main inner function have been called.
+
+See the [debug](https://github.com/pupeno/free-form/blob/master/src/cljs/free_form/debug.cljs) and the
+[Bootstrap 3 extension](https://github.com/pupeno/free-form/blob/master/src/cljs/free_form/bootsrap_3.cljs)s for
+examples.
+
+### Bootstrap 3 extension
 
 You can manually generate Bootstrap 3 forms by using code such as:
 
 ```clojure
-[:div.form-horizontal
- [:div.form-group {:free-form/error-class {:key :email :error "has-error"}}
-  [:label.col-sm-2.control-label {:for :email} "Email"]
-  [:div.col-sm-10 [:input.form-control {:free-form/input {:key :email}
-                                       :type            :email
-                                       :id              :email}]
-   [:div.text-danger {:free-form/error-message {:key :email}} [:p]]]]]
+[free-form.core/form @values @errors save-state
+ [:form.form-horizontal
+  [:div.form-group {:free-form/error-class {:key :email :error "has-error"}}
+   [:label.col-sm-2.control-label {:for :email} "Email"]
+   [:div.col-sm-10 [:input.form-control {:free-form/input {:key :email}
+                                         :type            :email
+                                         :id              :email}]
+    [:div.text-danger {:free-form/error-message {:key :email}} [:p]]]]]]
 ````
 
-but since that pattern is so common, it is now supported in this way:
+but since that pattern is so common, it is now supported by an extension:
 
 ```clojure
-[:div.form-horizontal {:free-form/options {:mode :bootstrap-3}}
- [:free-form/field {:type        :email
-                    :key         :email
-                    :label       "Email"}]]
+[free-form.core/form @values @errors save-state :bootstrap-3
+ [:form.form-horizontal {:free-form/options {:mode :bootstrap-3}}
+  [:free-form/field {:type  :email
+                     :key   :email
+                     :label "Email"}]]]
 ````
 
-The ```:free-form/options {:mode :bootstrap-3}``` is what triggers Bootstrap 3 generation and Free-form will
-automatically detect wether it's a [standard](http://free-form-examples.pupeno.com/reagent/bootstrap-3), [horizontal](http://free-form-examples.pupeno.com/reagent/bootstrap-3-horizontal)
+The extra argument, :bootstrap-3 is what triggers Bootstrap 3 generation and Free-form will automatically detect whether
+it's a [standard](http://free-form-examples.pupeno.com/reagent/bootstrap-3), [horizontal](http://free-form-examples.pupeno.com/reagent/bootstrap-3-horizontal)
 or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) form.
 
+### Debug extension
+
+The debug extension just prints the form before and after any other processing happens. Unlike the Bootstrap 3 one, it
+is not provided by default, so, you need to require the file to use it.
+
+```clojure
+(ns whatever
+  (:require [free-form.core :as free-form]
+            free-form.debug))
+```
+
 ## Changelog
+
+### v0.5.0
+- Extension system.
+- Bootstrap 3 provided as an extension.
+- Debug extension.
 
 ### v0.4.2 - 2016-11-12
 - Make all inputs controlled so changes can come from within our from outside.
