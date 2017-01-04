@@ -46,13 +46,6 @@ to make this input to connect to the email we would change it to:
 [Reagent-forms](https://github.com/reagent-project/reagent-forms) was a big inspiration but the way it handles state was
 not ideal in a re-frame scenario.
 
-## Current state
-
-This library is far from complete. The focus so far was in establishing how it should work and not attempt to provide a
-complete form solution. An important shortcoming is the [lack of tests](https://github.com/pupeno/free-form/issues/6).
-If you start using the library and find it's not flexible enough, please, get in touch. The goal is for it to be super
-flexible and useful in a wide range of situations.
-
 ## Usage
 
 First, you have to include Free-form in your project:
