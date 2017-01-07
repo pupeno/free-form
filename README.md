@@ -201,7 +201,7 @@ is not provided by default, so, you need to require the file to use it.
 
 ## Changelog
 
-### v0.5.0
+### v0.5.0 - 2017-01-07
 - Extension system.
 - Bootstrap 3 provided as an extension.
 - Debug extension.
