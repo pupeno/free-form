@@ -2,6 +2,7 @@
 
 (ns free-form.bootstrap-3
   (:require [clojure.walk :refer [postwalk prewalk]]
+            [clojure.string :as s]
             [free-form.util :refer [field? key->keys attributes-index]]
             [free-form.extension :as extension]))
 
@@ -28,7 +29,7 @@
 (defn- expand-bootstrap-3-fields [node]
   (if (field? node)
     (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
-          id (clojure.string/join "-" (map name keys))]
+          id (s/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
        [:label.control-label {:for id} label]
        (expand-bootstrap-3-input id keys type placeholder options)
@@ -38,7 +39,7 @@
 (defn- expand-bootstrap-3-horizontal-fields [node]
   (if (field? node)
     (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
-          id (clojure.string/join "-" (map name keys))]
+          id (s/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
        [:label.col-sm-2.control-label {:for id} label]
        [:div.col-sm-10 (expand-bootstrap-3-input id keys type placeholder options)
@@ -49,7 +50,7 @@
 (defn- expand-bootstrap-3-inline-fields [node]
   (if (field? node)
     (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
-          id (clojure.string/join "-" (map name keys))]
+          id (s/join "-" (map name keys))]
       [:div.form-group {:free-form/error-class {:keys keys :extra-keys extra-validation-error-keys :error "has-error"}}
        [:label.control-label {:for id} label]
        " "
