@@ -115,7 +115,47 @@ example:
  [...]]
 ```
 
-### Extensions
+### Bootstrap 3
+
+You can manually generate Bootstrap 3 forms by using code such as:
+
+```clojure
+[free-form.core/form @values @errors save-state
+ [:form.form-horizontal
+  [:div.form-group {:free-form/error-class {:key :email :error "has-error"}}
+   [:label.col-sm-2.control-label {:for :email} "Email"]
+   [:div.col-sm-10 [:input.form-control {:free-form/input {:key :email}
+                                         :type            :email
+                                         :id              :email}]
+    [:div.text-danger {:free-form/error-message {:key :email}} [:p]]]]]]
+````
+
+but since that pattern is so common, it is now supported by an extension:
+
+```clojure
+[free-form.core/form @values @errors save-state :bootstrap-3
+ [:form.form-horizontal {:free-form/options {:mode :bootstrap-3}}
+  [:free-form/field {:type  :email
+                     :key   :email
+                     :label "Email"}]]]
+````
+
+The extra argument, :bootstrap-3 is what triggers Bootstrap 3 generation and Free-form will automatically detect whether
+it's a [standard](http://free-form-examples.pupeno.com/reagent/bootstrap-3), [horizontal](http://free-form-examples.pupeno.com/reagent/bootstrap-3-horizontal)
+or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) form.
+
+### Debugging
+
+The debug extension just prints the form before and after any other processing happens. Unlike the Bootstrap 3 one, it
+is not provided by default, so, you need to require the file to use it.
+
+```clojure
+(ns whatever
+  (:require [free-form.core :as free-form]
+            free-form.debug))
+```
+
+### Writing your own extensions
 
 There's a fourth optional argument to specify one or more extensions to be applied to the form. For example, with only
 one extension called bootstrap-3:
@@ -158,46 +198,6 @@ extensions and the main inner function have been called.
 See the [debug](https://github.com/pupeno/free-form/blob/master/src/cljs/free_form/debug.cljs) and the
 [Bootstrap 3 extension](https://github.com/pupeno/free-form/blob/master/src/cljs/free_form/bootsrap_3.cljs)s for
 examples.
-
-### Bootstrap 3 extension
-
-You can manually generate Bootstrap 3 forms by using code such as:
-
-```clojure
-[free-form.core/form @values @errors save-state
- [:form.form-horizontal
-  [:div.form-group {:free-form/error-class {:key :email :error "has-error"}}
-   [:label.col-sm-2.control-label {:for :email} "Email"]
-   [:div.col-sm-10 [:input.form-control {:free-form/input {:key :email}
-                                         :type            :email
-                                         :id              :email}]
-    [:div.text-danger {:free-form/error-message {:key :email}} [:p]]]]]]
-````
-
-but since that pattern is so common, it is now supported by an extension:
-
-```clojure
-[free-form.core/form @values @errors save-state :bootstrap-3
- [:form.form-horizontal {:free-form/options {:mode :bootstrap-3}}
-  [:free-form/field {:type  :email
-                     :key   :email
-                     :label "Email"}]]]
-````
-
-The extra argument, :bootstrap-3 is what triggers Bootstrap 3 generation and Free-form will automatically detect whether
-it's a [standard](http://free-form-examples.pupeno.com/reagent/bootstrap-3), [horizontal](http://free-form-examples.pupeno.com/reagent/bootstrap-3-horizontal)
-or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) form.
-
-### Debug extension
-
-The debug extension just prints the form before and after any other processing happens. Unlike the Bootstrap 3 one, it
-is not provided by default, so, you need to require the file to use it.
-
-```clojure
-(ns whatever
-  (:require [free-form.core :as free-form]
-            free-form.debug))
-```
 
 ## Changelog
 
