@@ -73,9 +73,9 @@
    (let [errors (or errors {})
          extensions (if (sequential? extensions) extensions [extensions])
          inner-fn (fn [html]
-                            (->> html
-                                 (postwalk #(bind-input values on-change %))
-                                 (postwalk #(bind-error-class errors %))
-                                 (postwalk #(bind-error-messages errors %))))]
+                    (->> html
+                         (postwalk #(bind-input values on-change %))
+                         (postwalk #(bind-error-class errors %))
+                         (postwalk #(bind-error-messages errors %))))]
      (postwalk #(warn-of-leftovers %)
                ((reduce #(extension/extension %2 %1) inner-fn extensions) html)))))

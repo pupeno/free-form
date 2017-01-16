@@ -46,7 +46,6 @@
         [:div.text-danger {:free-form/error-message {:keys keys}} [:p]]]])
     node))
 
-
 (defn- expand-bootstrap-3-inline-fields [node]
   (if (field? node)
     (let [{:keys [type keys extra-validation-error-keys label placeholder options]} (key->keys (second node))
