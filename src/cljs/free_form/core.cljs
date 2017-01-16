@@ -27,7 +27,9 @@
     node
     (let [[attributes _ keys] (extract-attributes node :free-form/input)]
       (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
-                                                     :on-change #(on-change keys (js-event-value %)))))))
+                                                     :on-change #(on-change keys (if (string? %1)
+                                                                                   %1 ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
+                                                                                   (js-event-value %1)))))))) ; for all other cases, we extract it ourselves.
 
 (defn- error-class?
   "Tests whether the node should be marked with an error class should the field have an associated error."
