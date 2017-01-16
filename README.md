@@ -199,6 +199,13 @@ See the [debug](https://github.com/pupeno/free-form/blob/master/src/cljs/free_fo
 [Bootstrap 3 extension](https://github.com/pupeno/free-form/blob/master/src/cljs/free_form/bootsrap_3.cljs)s for
 examples.
 
+## Users
+
+This is a completely incomplete list of people/projects using Free-form:
+
+- [Dashman](https://dashman.tech)
+- [You?](mailto:pupeno@pupeno.com)
+
 ## Changelog
 
 ### v0.5.0 - 2017-01-07
