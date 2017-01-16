@@ -1,6 +1,6 @@
 ;;;; Copyright © 2015-2017 José Pablo Fernández Silva
 
-(defproject com.pupeno/free-form "0.5.0"
+(defproject com.pupeno/free-form "0.6.0-SNAPSHOT"
   :description "Library for building forms with Reagent or Re-frame."
   :url "https://github.com/pupeno/free-form"
   :license {:name "Eclipse Public License"
