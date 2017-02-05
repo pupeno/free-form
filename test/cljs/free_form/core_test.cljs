@@ -40,10 +40,10 @@
                                                 :type            :select
                                                 :id              :select}
                                        [:option]
-                                       [:option {:value :dog} "Dog"]
-                                       [:option {:value :cat} "Cat"]
-                                       [:option {:value :squirrel} "Squirrel"]
-                                       [:option {:value :giraffe} "Giraffe"]]
+                                       [:option {:value "dog"} "Dog"]
+                                       [:option {:value "cat"} "Cat"]
+                                       [:option {:value "squirrel"} "Squirrel"]
+                                       [:option {:value "giraffe"} "Giraffe"]]
                                       [:div.errors {:free-form/error-message {:key :select}} [:p.error]]]
                                      [:div.plain-field {:free-form/error-class {:key :select-with-group :error "validation-errors"}}
                                       [:label {:for :select} "Select with groups"]
@@ -52,15 +52,15 @@
                                                 :id              :select-with-group}
                                        [:option]
                                        [:optgroup {:label "Numbers"}
-                                        [:option {:value :one} "One"]
-                                        [:option {:value :two} "Two"]
-                                        [:option {:value :three} "Three"]
-                                        [:option {:value :four} "Four"]]
+                                        [:option {:value "one"} "One"]
+                                        [:option {:value "two"} "Two"]
+                                        [:option {:value "three"} "Three"]
+                                        [:option {:value "four"} "Four"]]
                                        [:optgroup {:label "Leters"}
-                                        [:option {:value :a} "A"]
-                                        [:option {:value :b} "B"]
-                                        [:option {:value :c} "C"]
-                                        [:option {:value :d} "D"]]]
+                                        [:option {:value "a"} "A"]
+                                        [:option {:value "b"} "B"]
+                                        [:option {:value "c"} "C"]
+                                        [:option {:value "d"} "D"]]]
                                       [:div.errors {:free-form/error-message {:key :select-with-group}} [:p.error]]]
                                      [:div.plain-field {:free-form/error-class {:key :textarea :error "validation-errors"}}
                                       [:label {:for :text-area} "Text area"]
@@ -145,31 +145,29 @@
                  [:label {:for :select} "Select"]
                  [:select {:type      :select
                            :id        :select
-                           :value     ""
                            :on-change :was-function}
                   [:option]
-                  [:option {:value :dog} "Dog"]
-                  [:option {:value :cat} "Cat"]
-                  [:option {:value :squirrel} "Squirrel"]
-                  [:option {:value :giraffe} "Giraffe"]]
+                  [:option {:value "dog"} "Dog"]
+                  [:option {:value "cat"} "Cat"]
+                  [:option {:value "squirrel"} "Squirrel"]
+                  [:option {:value "giraffe"} "Giraffe"]]
                  nil]
                 [:div.plain-field {}
                  [:label {:for :select} "Select with groups"]
                  [:select {:type      :select
                            :id        :select-with-group
-                           :value     ""
                            :on-change :was-function}
                   [:option]
                   [:optgroup {:label "Numbers"}
-                   [:option {:value :one} "One"]
-                   [:option {:value :two} "Two"]
-                   [:option {:value :three} "Three"]
-                   [:option {:value :four} "Four"]]
+                   [:option {:value "one"} "One"]
+                   [:option {:value "two"} "Two"]
+                   [:option {:value "three"} "Three"]
+                   [:option {:value "four"} "Four"]]
                   [:optgroup {:label "Leters"}
-                   [:option {:value :a} "A"]
-                   [:option {:value :b} "B"]
-                   [:option {:value :c} "C"]
-                   [:option {:value :d} "D"]]]
+                   [:option {:value "a"} "A"]
+                   [:option {:value "b"} "B"]
+                   [:option {:value "c"} "C"]
+                   [:option {:value "d"} "D"]]]
                  nil]
                 [:div.plain-field {}
                  [:label {:for :text-area} "Text area"]
@@ -230,13 +228,14 @@
                               (free-form/form {:text          "Text value"
                                                :email         "Email value"
                                                :password      "Password value"
-                                               ;:select "cat" ; TODO: enable this and fix generation, as it's broken right now.
-                                               ;:select-with-group "two" ; TODO: enable this and fix generation, as it's broken right now.
+                                               :select        "cat"
+                                               :select-with-group ["two" "b"]
                                                :textarea      "Textarea value"
                                                :t             {:e {:x {:t "Text with deep keys value"}}}
                                                :checkbox      true
-                                               :radio-buttons "radio-option-2"
-                                               } {} (fn [_keys _value])
+                                               :radio-buttons "radio-option-2"}
+
+                                              {} (fn [_keys _value])
                                               plain-reagent-form-template))]
         (is (= generated-input
                [:form {:noValidate true}
@@ -265,26 +264,24 @@
                  [:label {:for :select} "Select"]
                  [:select {:type      :select
                            :id        :select
-                           :value     ""
                            :on-change :was-function} [:option]
-                  [:option {:value :dog} "Dog"]
-                  [:option {:value :cat} "Cat"]
-                  [:option {:value :squirrel} "Squirrel"]
-                  [:option {:value :giraffe} "Giraffe"]] nil]
+                  [:option {:value "dog"} "Dog"]
+                  [:option {:value "cat" :selected "selected"} "Cat"]
+                  [:option {:value "squirrel"} "Squirrel"]
+                  [:option {:value "giraffe"} "Giraffe"]] nil]
                 [:div.plain-field {}
                  [:label {:for :select} "Select with groups"]
                  [:select {:type      :select
                            :id        :select-with-group
-                           :value     ""
                            :on-change :was-function} [:option]
-                  [:optgroup {:label "Numbers"} [:option {:value :one} "One"]
-                   [:option {:value :two} "Two"]
-                   [:option {:value :three} "Three"]
-                   [:option {:value :four} "Four"]]
-                  [:optgroup {:label "Leters"} [:option {:value :a} "A"]
-                   [:option {:value :b} "B"]
-                   [:option {:value :c} "C"]
-                   [:option {:value :d} "D"]]] nil]
+                  [:optgroup {:label "Numbers"} [:option {:value "one"} "One"]
+                   [:option {:value "two" :selected "selected"} "Two"]
+                   [:option {:value "three"} "Three"]
+                   [:option {:value "four"} "Four"]]
+                  [:optgroup {:label "Leters"} [:option {:value "a"} "A"]
+                   [:option {:value "b" :selected "selected"} "B"]
+                   [:option {:value "c"} "C"]
+                   [:option {:value "d"} "D"]]] nil]
                 [:div.plain-field {}
                  [:label {:for :text-area} "Text area"]
                  [:textarea {:id        :textarea

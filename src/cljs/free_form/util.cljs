@@ -13,8 +13,12 @@
     m))
 
 (def attributes-index
-  "The second element in structure that represents an input is the attributes, as in :type, :key, etc."
+  "The second element in hiccup structure that represents an input is the attributes, as in :type, :key, etc."
   1)
+
+(def children-index
+  "The third (and further) elements in hiccup structure that represents an element's children"
+  2)
 
 ; Not needed yet, but might be needed in the future
 #_(defn- remove-free-form-attribute [node attr-location attr-name]

@@ -6,7 +6,7 @@
             clojure.string
             [clojure.walk :refer [postwalk prewalk]]
             [free-form.extension :as extension]
-            [free-form.util :refer [field? key->keys attributes-index]]))
+            [free-form.util :refer [field? key->keys attributes-index children-index]]))
 
 (defn- extract-attributes [node key]
   (let [attributes (get node attributes-index)
@@ -30,17 +30,38 @@
     event                                                   ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
     (js-event-value event)))                                ; for all other cases, we extract it ourselves.
 
+(defn select-option-for-value [option-node selected-values]
+  "Compares an [:option {:value 'val'}] node with the vector of `selected-values`,
+   returning an updated node when the :value exists in `selected-values`. Ignores
+   other elements such as :optgroup"
+  (if (and (vector? option-node) (= (first option-node) :option))
+    (let [{:keys [value] :as attributes} (get option-node attributes-index)]
+      (if (some #{value} selected-values)
+        (assoc option-node attributes-index (assoc attributes :selected "selected"))
+        option-node))
+    option-node))
+
 (defn- bind-input [values on-change node]
   (if (not (input? node))
     node
     (let [[attributes _ keys] (extract-attributes node :free-form/input)
-          on-change-fn #(on-change keys (extract-event-value %1))]
+          on-change-fn        #(on-change keys (extract-event-value %1))
+          current-value       (get-in values keys)]
+
       (case (:type attributes)
-        :checkbox (assoc node attributes-index (assoc attributes :default-checked (= true (get-in values keys))
+        :checkbox (assoc node attributes-index (assoc attributes :default-checked (true? current-value)
                                                                  :on-change on-change-fn))
-        :radio (assoc node attributes-index (assoc attributes :default-checked (= (:value attributes) (get-in values keys))
+
+        :radio (assoc node attributes-index (assoc attributes :default-checked (= (:value attributes) current-value)
                                                               :on-change on-change-fn))
-        (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
+
+        :select (let [attributes (assoc attributes :on-change on-change-fn)
+                      child-nodes (postwalk
+                                    #(select-option-for-value % (vec (flatten [current-value])))
+                                    (subvec node children-index))]
+                  (concat [(first node) attributes] child-nodes))
+
+        (assoc node attributes-index (assoc attributes :value (or current-value "")
                                                        :on-change on-change-fn))))))
 
 (defn- error-class?
