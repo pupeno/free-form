@@ -35,15 +35,11 @@
     node
     (let [[attributes _ keys] (extract-attributes node :free-form/input)
           on-change-fn #(on-change keys (extract-event-value %1))]
-
       (case (:type attributes)
-        :checkbox
-        (assoc node attributes-index (assoc attributes :defaultChecked (= true (get-in values keys))
-                                                       :on-change on-change-fn))
-        :radio
-        (assoc node attributes-index (assoc attributes :defaultChecked (= (:value attributes) (get-in values keys))
-                                                       :on-change on-change-fn))
-
+        :checkbox (assoc node attributes-index (assoc attributes :default-checked (= true (get-in values keys))
+                                                                 :on-change on-change-fn))
+        :radio (assoc node attributes-index (assoc attributes :default-checked (= (:value attributes) (get-in values keys))
+                                                              :on-change on-change-fn))
         (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
                                                        :on-change on-change-fn))))))
 
