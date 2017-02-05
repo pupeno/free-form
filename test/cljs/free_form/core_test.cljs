@@ -101,20 +101,20 @@
                                      ; === Radio Buttons
                                      [:div.field {:free-form/error-class {:key :radio :error "validation-errors"}}
                                       [:label {:for :radio-option-1} "Radio Option 1"
-                                        [:input.form-control {:free-form/input {:key :radio}
-                                                              :type            :radio
-                                                              :id              :radio-option-1
-                                                              :value           "radio-option-1"}]]
+                                       [:input.form-control {:free-form/input {:key :radio}
+                                                             :type            :radio
+                                                             :id              :radio-option-1
+                                                             :value           "radio-option-1"}]]
                                       [:label {:for :radio-option-2} "Radio Option 2"
-                                        [:input.form-control {:free-form/input {:key :radio}
-                                                              :type            :radio
-                                                              :id              :radio-option-2
-                                                              :value           "radio-option-2"}]]
+                                       [:input.form-control {:free-form/input {:key :radio}
+                                                             :type            :radio
+                                                             :id              :radio-option-2
+                                                             :value           "radio-option-2"}]]
                                       [:label {:for :radio-option-3} "Radio Option 3"
-                                        [:input.form-control {:free-form/input {:key :radio}
-                                                              :type            :radio
-                                                              :id              :radio-option-3
-                                                              :value           "radio-option-3"}]]
+                                       [:input.form-control {:free-form/input {:key :radio}
+                                                             :type            :radio
+                                                             :id              :radio-option-3
+                                                             :value           "radio-option-3"}]]
                                       [:div.errors {:free-form/error-message {:key :radio}} [:p.error]]]
 
 
@@ -123,7 +123,7 @@
     (testing "simple generation"
       (let [generated-input (hide-on-change
                               (free-form/form {} {} (fn [_keys _value])
-                                plain-reagent-form-template))]
+                                              plain-reagent-form-template))]
         (is (= generated-input
                [:form {:noValidate true}
                 nil
@@ -221,23 +221,23 @@
 
                 [:div.field {}
                  [:label {:for :radio-option-1} "Radio Option 1"
-                   [:input.form-control {:type           :radio
-                                         :id             :radio-option-1
-                                         :value          "radio-option-1"
-                                         :defaultChecked false
-                                         :on-change      :was-function}]]
+                  [:input.form-control {:type           :radio
+                                        :id             :radio-option-1
+                                        :value          "radio-option-1"
+                                        :defaultChecked false
+                                        :on-change      :was-function}]]
                  [:label {:for :radio-option-2} "Radio Option 2"
-                   [:input.form-control {:type           :radio
-                                         :id             :radio-option-2
-                                         :value          "radio-option-2"
-                                         :defaultChecked false
-                                         :on-change      :was-function}]]
+                  [:input.form-control {:type           :radio
+                                        :id             :radio-option-2
+                                        :value          "radio-option-2"
+                                        :defaultChecked false
+                                        :on-change      :was-function}]]
                  [:label {:for :radio-option-3} "Radio Option 3"
-                   [:input.form-control {:type           :radio
-                                         :id             :radio-option-3
-                                         :value          "radio-option-3"
-                                         :defaultChecked false
-                                         :on-change      :was-function}]]
+                  [:input.form-control {:type           :radio
+                                        :id             :radio-option-3
+                                        :value          "radio-option-3"
+                                        :defaultChecked false
+                                        :on-change      :was-function}]]
                  nil]
 
 
@@ -245,18 +245,18 @@
 
     (testing "generation with initial data"
       (let [generated-input (hide-on-change
-                              (free-form/form {:text     "Text value"
-                                               :email    "Email value"
-                                               :password "Password value"
+                              (free-form/form {:text           "Text value"
+                                               :email          "Email value"
+                                               :password       "Password value"
                                                ;:select "cat" ; TODO: enable this and fix generation, as it's broken right now.
                                                ;:select-with-group "two" ; TODO: enable this and fix generation, as it's broken right now.
-                                               :textarea "Textarea value"
-                                               :t        {:e {:x {:t "Text with deep keys value"}}}
-                                               :checkbox-true true
+                                               :textarea       "Textarea value"
+                                               :t              {:e {:x {:t "Text with deep keys value"}}}
+                                               :checkbox-true  true
                                                :checkbox-false false
-                                               :radio    "radio-option-2"
+                                               :radio          "radio-option-2"
                                                } {} (fn [_keys _value])
-                                plain-reagent-form-template))]
+                                              plain-reagent-form-template))]
         (is (= generated-input
                [:form {:noValidate true}
                 nil
@@ -353,23 +353,23 @@
 
                 [:div.field {}
                  [:label {:for :radio-option-1} "Radio Option 1"
-                   [:input.form-control {:type           :radio
-                                         :id             :radio-option-1
-                                         :value          "radio-option-1"
-                                         :defaultChecked false
-                                         :on-change      :was-function}]]
+                  [:input.form-control {:type           :radio
+                                        :id             :radio-option-1
+                                        :value          "radio-option-1"
+                                        :defaultChecked false
+                                        :on-change      :was-function}]]
                  [:label {:for :radio-option-2} "Radio Option 2"
-                   [:input.form-control {:type           :radio
-                                         :id             :radio-option-2
-                                         :value          "radio-option-2"
-                                         :defaultChecked true
-                                         :on-change      :was-function}]]
+                  [:input.form-control {:type           :radio
+                                        :id             :radio-option-2
+                                        :value          "radio-option-2"
+                                        :defaultChecked true
+                                        :on-change      :was-function}]]
                  [:label {:for :radio-option-3} "Radio Option 3"
-                   [:input.form-control {:type           :radio
-                                         :id             :radio-option-3
-                                         :value          "radio-option-3"
-                                         :defaultChecked false
-                                         :on-change      :was-function}]]
+                  [:input.form-control {:type           :radio
+                                        :id             :radio-option-3
+                                        :value          "radio-option-3"
+                                        :defaultChecked false
+                                        :on-change      :was-function}]]
                  nil]
 
                 [:button "Button"]]))))))

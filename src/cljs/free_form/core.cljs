@@ -27,14 +27,14 @@
 
 (defn- extract-event-value [event]
   (if (string? event)
-    event ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
-    (js-event-value event))) ; for all other cases, we extract it ourselves.
+    event                                                   ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
+    (js-event-value event)))                                ; for all other cases, we extract it ourselves.
 
 (defn- bind-input [values on-change node]
   (if (not (input? node))
     node
     (let [[attributes _ keys] (extract-attributes node :free-form/input)
-          on-change-fn        #(on-change keys (extract-event-value %1))]
+          on-change-fn #(on-change keys (extract-event-value %1))]
 
       (case (:type attributes)
         :checkbox
