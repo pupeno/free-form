@@ -27,8 +27,8 @@
 
 (defn- extract-event-value [event]
   (if (string? event)
-    event ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
-    (js-event-value event))) ; for all other cases, we extract it ourselves.
+    event                                                   ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
+    (js-event-value event)))                                ; for all other cases, we extract it ourselves.
 
 (defn select-option-for-value [option-node selected-values]
   "Compares an [:option {:value 'val'}] node with the vector of `selected-values`,
@@ -49,21 +49,19 @@
           current-value       (get-in values keys)]
 
       (case (:type attributes)
-        :checkbox
-        (assoc node attributes-index (assoc attributes :defaultChecked (true? current-value)
-                                                       :on-change on-change-fn))
-        :radio
-        (assoc node attributes-index (assoc attributes :defaultChecked (= (:value attributes) current-value)
-                                                       :on-change on-change-fn))
+        :checkbox (assoc node attributes-index (assoc attributes :default-checked (true? current-value)
+                                                                 :on-change on-change-fn))
 
-        :select
-        (let [attributes (assoc attributes :on-change on-change-fn)
-              child-nodes (postwalk
-                            #(select-option-for-value % (vec (flatten [current-value])))
-                            (subvec node children-index))]
-          (concat [(first node) attributes] child-nodes))
+        :radio (assoc node attributes-index (assoc attributes :default-checked (= (:value attributes) current-value)
+                                                              :on-change on-change-fn))
 
-        (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
+        :select (let [attributes (assoc attributes :on-change on-change-fn)
+                      child-nodes (postwalk
+                                    #(select-option-for-value % (vec (flatten [current-value])))
+                                    (subvec node children-index))]
+                  (concat [(first node) attributes] child-nodes))
+
+        (assoc node attributes-index (assoc attributes :value (or current-value "")
                                                        :on-change on-change-fn))))))
 
 (defn- error-class?

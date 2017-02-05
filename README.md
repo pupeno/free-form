@@ -204,9 +204,14 @@ examples.
 This is a completely incomplete list of people/projects using Free-form:
 
 - [Dashman](https://dashman.tech)
+- [Wieck](https://wieck.com/)
 - [You?](mailto:pupeno@pupeno.com)
 
 ## Changelog
+
+### v0.6.0
+- Add support for checkbox and radio form elements, courtesy of [Scott Bauer](https://github.com/Bauerpauer): https://github.com/pupeno/free-form/pull/26
+- Add support for checkbox and radio buttons in the Bootstrap 3 extension.
 
 ### v0.5.0 - 2017-01-07
 - Extension system.
