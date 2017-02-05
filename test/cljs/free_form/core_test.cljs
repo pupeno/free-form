@@ -82,6 +82,42 @@
                                                             :id              :text-with-extra-validation-errors
                                                             :placeholder     "This will be marked as a validation error also when Text and General have validation errors."}]
                                       [:div.errors {:free-form/error-message {:key :text-with-extra-validation-errors}} [:p.error]]]
+
+                                     ; === Checkboxes
+                                     [:div.field {:free-form/error-class {:key :checkbox-true :error "validation-errors"}}
+                                      [:label {:for :checkbox-true} "Checkbox (default checked)"]
+                                      [:input.form-control {:free-form/input {:key :checkbox-true}
+                                                            :type            :checkbox
+                                                            :id              :checkbox-true}]
+                                      [:div.errors {:free-form/error-message {:key :checkbox-false}} [:p.error]]]
+
+                                     [:div.field {:free-form/error-class {:key :checkbox-false :error "validation-errors"}}
+                                      [:label {:for :checkbox-false} "Checkbox (default not checked)"]
+                                      [:input.form-control {:free-form/input {:key :checkbox-false}
+                                                            :type            :checkbox
+                                                            :id              :checkbox-false}]
+                                      [:div.errors {:free-form/error-message {:key :checkbox-false}} [:p.error]]]
+
+                                     ; === Radio Buttons
+                                     [:div.field {:free-form/error-class {:key :radio :error "validation-errors"}}
+                                      [:label {:for :radio-option-1} "Radio Option 1"
+                                        [:input.form-control {:free-form/input {:key :radio}
+                                                              :type            :radio
+                                                              :id              :radio-option-1
+                                                              :value           "radio-option-1"}]]
+                                      [:label {:for :radio-option-2} "Radio Option 2"
+                                        [:input.form-control {:free-form/input {:key :radio}
+                                                              :type            :radio
+                                                              :id              :radio-option-2
+                                                              :value           "radio-option-2"}]]
+                                      [:label {:for :radio-option-3} "Radio Option 3"
+                                        [:input.form-control {:free-form/input {:key :radio}
+                                                              :type            :radio
+                                                              :id              :radio-option-3
+                                                              :value           "radio-option-3"}]]
+                                      [:div.errors {:free-form/error-message {:key :radio}} [:p.error]]]
+
+
                                      [:button "Button"]]]
 
     (testing "simple generation"
@@ -166,6 +202,45 @@
                                        :value       ""
                                        :on-change   :was-function}]
                  nil]
+
+                [:div.field {}
+                 [:label {:for :checkbox-true} "Checkbox (default checked)"]
+                 [:input.form-control {:type           :checkbox
+                                       :id             :checkbox-true
+                                       :defaultChecked false
+                                       :on-change      :was-function}]
+                 nil]
+
+                [:div.field {}
+                 [:label {:for :checkbox-false} "Checkbox (default not checked)"]
+                 [:input.form-control {:type           :checkbox
+                                       :id             :checkbox-false
+                                       :defaultChecked false
+                                       :on-change      :was-function}]
+                 nil]
+
+                [:div.field {}
+                 [:label {:for :radio-option-1} "Radio Option 1"
+                   [:input.form-control {:type           :radio
+                                         :id             :radio-option-1
+                                         :value          "radio-option-1"
+                                         :defaultChecked false
+                                         :on-change      :was-function}]]
+                 [:label {:for :radio-option-2} "Radio Option 2"
+                   [:input.form-control {:type           :radio
+                                         :id             :radio-option-2
+                                         :value          "radio-option-2"
+                                         :defaultChecked false
+                                         :on-change      :was-function}]]
+                 [:label {:for :radio-option-3} "Radio Option 3"
+                   [:input.form-control {:type           :radio
+                                         :id             :radio-option-3
+                                         :value          "radio-option-3"
+                                         :defaultChecked false
+                                         :on-change      :was-function}]]
+                 nil]
+
+
                 [:button "Button"]]))))
 
     (testing "generation with initial data"
@@ -177,6 +252,9 @@
                                                ;:select-with-group "two" ; TODO: enable this and fix generation, as it's broken right now.
                                                :textarea "Textarea value"
                                                :t        {:e {:x {:t "Text with deep keys value"}}}
+                                               :checkbox-true true
+                                               :checkbox-false false
+                                               :radio    "radio-option-2"
                                                } {} (fn [_keys _value])
                                 plain-reagent-form-template))]
         (is (= generated-input
@@ -256,6 +334,42 @@
                                        :value       ""
                                        :on-change   :was-function}]
                  nil]
+
+                [:div.field {}
+                 [:label {:for :checkbox-true} "Checkbox (default checked)"]
+                 [:input.form-control {:type           :checkbox
+                                       :id             :checkbox-true
+                                       :defaultChecked true
+                                       :on-change      :was-function}]
+                 nil]
+
+                [:div.field {}
+                 [:label {:for :checkbox-false} "Checkbox (default not checked)"]
+                 [:input.form-control {:type           :checkbox
+                                       :id             :checkbox-false
+                                       :defaultChecked false
+                                       :on-change      :was-function}]
+                 nil]
+
+                [:div.field {}
+                 [:label {:for :radio-option-1} "Radio Option 1"
+                   [:input.form-control {:type           :radio
+                                         :id             :radio-option-1
+                                         :value          "radio-option-1"
+                                         :defaultChecked false
+                                         :on-change      :was-function}]]
+                 [:label {:for :radio-option-2} "Radio Option 2"
+                   [:input.form-control {:type           :radio
+                                         :id             :radio-option-2
+                                         :value          "radio-option-2"
+                                         :defaultChecked true
+                                         :on-change      :was-function}]]
+                 [:label {:for :radio-option-3} "Radio Option 3"
+                   [:input.form-control {:type           :radio
+                                         :id             :radio-option-3
+                                         :value          "radio-option-3"
+                                         :defaultChecked false
+                                         :on-change      :was-function}]]
+                 nil]
+
                 [:button "Button"]]))))))
-
-

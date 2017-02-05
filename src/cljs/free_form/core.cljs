@@ -20,16 +20,32 @@
        (contains? (second node) :free-form/input)))
 
 (defn- js-event-value [event]
-  (.-value (.-target event)))
+  (let [target (.-target event)]
+    (case (.-type target)
+      "checkbox" (.-checked target)
+      (.-value target))))
+
+(defn- extract-event-value [event]
+  (if (string? event)
+    event ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
+    (js-event-value event))) ; for all other cases, we extract it ourselves.
 
 (defn- bind-input [values on-change node]
   (if (not (input? node))
     node
-    (let [[attributes _ keys] (extract-attributes node :free-form/input)]
-      (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
-                                                     :on-change #(on-change keys (if (string? %1)
-                                                                                   %1 ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
-                                                                                   (js-event-value %1)))))))) ; for all other cases, we extract it ourselves.
+    (let [[attributes _ keys] (extract-attributes node :free-form/input)
+          on-change-fn        #(on-change keys (extract-event-value %1))]
+
+      (case (:type attributes)
+        :checkbox
+        (assoc node attributes-index (assoc attributes :defaultChecked (= true (get-in values keys))
+                                                       :on-change on-change-fn))
+        :radio
+        (assoc node attributes-index (assoc attributes :defaultChecked (= (:value attributes) (get-in values keys))
+                                                       :on-change on-change-fn))
+
+        (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
+                                                       :on-change on-change-fn))))))
 
 (defn- error-class?
   "Tests whether the node should be marked with an error class should the field have an associated error."
