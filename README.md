@@ -204,6 +204,7 @@ examples.
 This is a completely incomplete list of people/projects using Free-form:
 
 - [Dashman](https://dashman.tech)
+- [Wieck](https://wieck.com/)
 - [You?](mailto:pupeno@pupeno.com)
 
 ## Changelog
