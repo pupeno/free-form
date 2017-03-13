@@ -39,7 +39,7 @@
           {:keys [value-on error-on extra-error-keys]} free-form-attributes
           on-change-fn #(on-change keys (extract-event-value %1))
           value-on (or value-on (case (:type attributes)
-                                  [:checkbox :radio] :default-checked
+                                  (:checkbox :radio) :default-checked
                                   :value))
           value (case (:type attributes)
                   :checkbox (= true (get-in values keys))
