@@ -133,21 +133,25 @@ You can manually generate Bootstrap 3 forms by using code such as:
 but since that pattern is so common, it is now supported by an extension:
 
 ```clojure
-[free-form.core/form @values @errors save-state :bootstrap-3
- [:form.form-horizontal {:free-form/options {:mode :bootstrap-3}}
+(ns whatever
+  (:require [free-form.core :as free-form]
+            free-form.bootstrap-3))
+            
+[free-form/form @values @errors save-state :bootstrap-3
+ [:form.form-horizontal
   [:free-form/field {:type  :email
                      :key   :email
                      :label "Email"}]]]
 ````
 
-The extra argument, :bootstrap-3 is what triggers Bootstrap 3 generation and Free-form will automatically detect whether
-it's a [standard](http://free-form-examples.pupeno.com/reagent/bootstrap-3), [horizontal](http://free-form-examples.pupeno.com/reagent/bootstrap-3-horizontal)
+You need to require ```free-form.bootstrap-3``` for the extension to be available. The extra argument, 
+```:bootstrap-3``` is what triggers Bootstrap 3 generation and Free-form will automatically detect whether it's a 
+[standard](http://free-form-examples.pupeno.com/reagent/bootstrap-3), [horizontal](http://free-form-examples.pupeno.com/reagent/bootstrap-3-horizontal)
 or [inline](http://free-form-examples.pupeno.com/reagent/bootstrap-3-inline) form.
 
 ### Debugging
 
-The debug extension just prints the form before and after any other processing happens. Unlike the Bootstrap 3 one, it
-is not provided by default, so, you need to require the file to use it.
+The debug extension just prints the form before and after any other processing happens.
 
 ```clojure
 (ns whatever

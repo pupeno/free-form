@@ -1,9 +1,7 @@
 ;;;; Copyright © 2015-2017 José Pablo Fernández Silva
 
 (ns free-form.core
-  (:require free-form.bootstrap-3                           ; Just to make the bootstrap-3 extension automatically available
-            free-form.debug                                 ; Just to make the debug extension automatically available
-            clojure.string
+  (:require clojure.string
             [clojure.walk :refer [postwalk prewalk]]
             [free-form.extension :as extension]
             [free-form.util :refer [field? key->keys attributes-index]]))
@@ -26,22 +24,34 @@
       (.-value target))))
 
 (defn- extract-event-value [event]
-  (if (string? event)
+  (if (or (boolean? event)
+          (string? event))
     event                                                   ; React-toolbox generates events that already contain a stracted string of the value as the first paramenter
     (js-event-value event)))                                ; for all other cases, we extract it ourselves.
 
-(defn- bind-input [values on-change node]
+(defn- first-non-nil [& coll]
+  (first (filter (complement nil?) coll)))
+
+(defn- bind-input [values errors on-change node]
   (if (not (input? node))
     node
-    (let [[attributes _ keys] (extract-attributes node :free-form/input)
-          on-change-fn #(on-change keys (extract-event-value %1))]
-      (case (:type attributes)
-        :checkbox (assoc node attributes-index (assoc attributes :default-checked (= true (get-in values keys))
-                                                                 :on-change on-change-fn))
-        :radio (assoc node attributes-index (assoc attributes :default-checked (= (:value attributes) (get-in values keys))
-                                                              :on-change on-change-fn))
-        (assoc node attributes-index (assoc attributes :value (or (get-in values keys) "")
-                                                       :on-change on-change-fn))))))
+    (let [[attributes free-form-attributes keys] (extract-attributes node :free-form/input)
+          {:keys [value-on error-on extra-error-keys]} free-form-attributes
+          on-change-fn #(on-change keys (extract-event-value %1))
+          value-on (or value-on (case (:type attributes)
+                                  [:checkbox :radio] :default-checked
+                                  :value))
+          value (case (:type attributes)
+                  :checkbox (= true (get-in values keys))
+                  :radio (= (:value attributes) (get-in values keys))
+                  (first-non-nil (get-in values keys) (:blank-value free-form-attributes) ""))
+          input-errors (get-in errors keys)]
+      (assoc node attributes-index
+                  (cond-> attributes
+                    true (assoc :on-change on-change-fn)
+                    true (assoc value-on value)
+                    (and error-on input-errors) (assoc error-on (clojure.string/join " " input-errors))
+                    (and extra-error-keys (some #(get-in errors %) extra-error-keys)) (assoc error-on " "))))))
 
 (defn- error-class?
   "Tests whether the node should be marked with an error class should the field have an associated error."
@@ -88,7 +98,7 @@
          extensions (if (sequential? extensions) extensions [extensions])
          inner-fn (fn [html]
                     (->> html
-                         (postwalk #(bind-input values on-change %))
+                         (postwalk #(bind-input values errors on-change %))
                          (postwalk #(bind-error-class errors %))
                          (postwalk #(bind-error-messages errors %))))]
      (postwalk #(warn-of-leftovers %)
