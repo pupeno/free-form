@@ -112,218 +112,219 @@
 
 
     (testing "simple generation"
-      (let [generated-input (hide-on-change
-                              (free-form/form {} {} (fn [_keys _value])
-                                              plain-reagent-form-template))]
-        (is (= generated-input
-               [:form {:noValidate true}
-                nil
-                [:div.plain-field {}
-                 [:label {:for :text} "Text"]
-                 [:input {:type        :text
-                          :id          :text
-                          :placeholder "placeholder"
-                          :value       ""
-                          :on-change   :was-function}]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :email} "Email"]
-                 [:input {:type        :email
-                          :id          :email
-                          :placeholder "placeholder@example.com"
-                          :value       ""
-                          :on-change   :was-function}]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :password} "Password"]
-                 [:input {:type      :password
-                          :id        :password
-                          :value     ""
-                          :on-change :was-function}]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :select} "Select"]
-                 [:select {:type      :select
-                           :id        :select
-                           :value     ""
-                           :on-change :was-function}
-                  [:option]
-                  [:option {:value :dog} "Dog"]
-                  [:option {:value :cat} "Cat"]
-                  [:option {:value :squirrel} "Squirrel"]
-                  [:option {:value :giraffe} "Giraffe"]]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :select} "Select with groups"]
-                 [:select {:type      :select
-                           :id        :select-with-group
-                           :value     ""
-                           :on-change :was-function}
-                  [:option]
-                  [:optgroup {:label "Numbers"}
-                   [:option {:value :one} "One"]
-                   [:option {:value :two} "Two"]
-                   [:option {:value :three} "Three"]
-                   [:option {:value :four} "Four"]]
-                  [:optgroup {:label "Leters"}
-                   [:option {:value :a} "A"]
-                   [:option {:value :b} "B"]
-                   [:option {:value :c} "C"]
-                   [:option {:value :d} "D"]]]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :text-area} "Text area"]
-                 [:textarea {:id        :textarea
-                             :value     ""
-                             :on-change :was-function}]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :text} "Text with deep keys"]
-                 [:input {:type        :text
-                          :id          :text
-                          :placeholder "placeholder"
-                          :value       ""
-                          :on-change   :was-function}]
-                 nil]
-                [:div.plain-field {}
-                 [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
-                 [:input {:type        :text
-                          :id          :text-with-extra-validation-errors
-                          :placeholder "This will be marked as a validation error also when Text and General have validation errors."
-                          :value       ""
-                          :on-change   :was-function}]
-                 nil]
-                [:div {}
-                 [:input {:type            :checkbox
-                          :id              :checkbox
-                          :default-checked false
-                          :on-change       :was-function}]
-                 [:label {:for :checkbox} "Checkbox"]
-                 nil]
-                [:div.plain-field {}
-                 [:label
-                  [:input {:type            :radio
-                           :name            :radio-buttons
-                           :value           "radio-option-1"
-                           :default-checked false
-                           :on-change       :was-function}]
-                  "Radio Option 1"]
-                 [:label
-                  [:input {:type            :radio
-                           :name            :radio-buttons
-                           :value           "radio-option-2"
-                           :default-checked false
-                           :on-change       :was-function}]
-                  "Radio Option 2"]
-                 [:label
-                  [:input {:type            :radio
-                           :name            :radio-buttons
-                           :value           "radio-option-3"
-                           :default-checked false
-                           :on-change       :was-function}]
-                  "Radio Option 3"]
-                 nil]
-                [:button "Button"]]))))
+      (let [generated-form (hide-on-change
+                             (free-form/form {} {} (fn [_keys _value])
+                                             plain-reagent-form-template))
+            expected-form [:form {:noValidate true}
+                           nil
+                           [:div.plain-field {}
+                            [:label {:for :text} "Text"]
+                            [:input {:type        :text
+                                     :id          :text
+                                     :placeholder "placeholder"
+                                     :value       ""
+                                     :on-change   :was-function}]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :email} "Email"]
+                            [:input {:type        :email
+                                     :id          :email
+                                     :placeholder "placeholder@example.com"
+                                     :value       ""
+                                     :on-change   :was-function}]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :password} "Password"]
+                            [:input {:type      :password
+                                     :id        :password
+                                     :value     ""
+                                     :on-change :was-function}]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :select} "Select"]
+                            [:select {:type      :select
+                                      :id        :select
+                                      :value     ""
+                                      :on-change :was-function}
+                             [:option]
+                             [:option {:value :dog} "Dog"]
+                             [:option {:value :cat} "Cat"]
+                             [:option {:value :squirrel} "Squirrel"]
+                             [:option {:value :giraffe} "Giraffe"]]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :select} "Select with groups"]
+                            [:select {:type      :select
+                                      :id        :select-with-group
+                                      :value     ""
+                                      :on-change :was-function}
+                             [:option]
+                             [:optgroup {:label "Numbers"}
+                              [:option {:value :one} "One"]
+                              [:option {:value :two} "Two"]
+                              [:option {:value :three} "Three"]
+                              [:option {:value :four} "Four"]]
+                             [:optgroup {:label "Leters"}
+                              [:option {:value :a} "A"]
+                              [:option {:value :b} "B"]
+                              [:option {:value :c} "C"]
+                              [:option {:value :d} "D"]]]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :text-area} "Text area"]
+                            [:textarea {:id        :textarea
+                                        :value     ""
+                                        :on-change :was-function}]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :text} "Text with deep keys"]
+                            [:input {:type        :text
+                                     :id          :text
+                                     :placeholder "placeholder"
+                                     :value       ""
+                                     :on-change   :was-function}]
+                            nil]
+                           [:div.plain-field {}
+                            [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
+                            [:input {:type        :text
+                                     :id          :text-with-extra-validation-errors
+                                     :placeholder "This will be marked as a validation error also when Text and General have validation errors."
+                                     :value       ""
+                                     :on-change   :was-function}]
+                            nil]
+                           [:div {}
+                            [:input {:type            :checkbox
+                                     :id              :checkbox
+                                     :default-checked false
+                                     :on-change       :was-function}]
+                            [:label {:for :checkbox} "Checkbox"]
+                            nil]
+                           [:div.plain-field {}
+                            [:label
+                             [:input {:type            :radio
+                                      :name            :radio-buttons
+                                      :value           "radio-option-1"
+                                      :default-checked false
+                                      :on-change       :was-function}]
+                             "Radio Option 1"]
+                            [:label
+                             [:input {:type            :radio
+                                      :name            :radio-buttons
+                                      :value           "radio-option-2"
+                                      :default-checked false
+                                      :on-change       :was-function}]
+                             "Radio Option 2"]
+                            [:label
+                             [:input {:type            :radio
+                                      :name            :radio-buttons
+                                      :value           "radio-option-3"
+                                      :default-checked false
+                                      :on-change       :was-function}]
+                             "Radio Option 3"]
+                            nil]
+                           [:button "Button"]]]
+        (is (= generated-form expected-form)
+            (with-out-str (cljs.pprint/pprint generated-form)))))
 
     (testing "generation with initial data"
-      (let [generated-input (hide-on-change
-                              (free-form/form {:text          "Text value"
-                                               :email         "Email value"
-                                               :password      "Password value"
-                                               ;:select "cat" ; TODO: enable this and fix generation, as it's broken right now.
-                                               ;:select-with-group "two" ; TODO: enable this and fix generation, as it's broken right now.
-                                               :textarea      "Textarea value"
-                                               :t             {:e {:x {:t "Text with deep keys value"}}}
-                                               :checkbox      true
-                                               :radio-buttons "radio-option-2"
-                                               } {} (fn [_keys _value])
-                                              plain-reagent-form-template))]
-        (is (= generated-input
-               [:form {:noValidate true}
-                nil
-                [:div.plain-field {}
-                 [:label {:for :text} "Text"]
-                 [:input {:type        :text
-                          :id          :text
-                          :placeholder "placeholder"
-                          :value       "Text value"
-                          :on-change   :was-function}] nil]
-                [:div.plain-field {}
-                 [:label {:for :email} "Email"]
-                 [:input {:type        :email
-                          :id          :email
-                          :placeholder "placeholder@example.com"
-                          :value       "Email value"
-                          :on-change   :was-function}] nil]
-                [:div.plain-field {}
-                 [:label {:for :password} "Password"]
-                 [:input {:type      :password
-                          :id        :password
-                          :value     "Password value"
-                          :on-change :was-function}] nil]
-                [:div.plain-field {}
-                 [:label {:for :select} "Select"]
-                 [:select {:type      :select
-                           :id        :select
-                           :value     ""
-                           :on-change :was-function} [:option]
-                  [:option {:value :dog} "Dog"]
-                  [:option {:value :cat} "Cat"]
-                  [:option {:value :squirrel} "Squirrel"]
-                  [:option {:value :giraffe} "Giraffe"]] nil]
-                [:div.plain-field {}
-                 [:label {:for :select} "Select with groups"]
-                 [:select {:type      :select
-                           :id        :select-with-group
-                           :value     ""
-                           :on-change :was-function} [:option]
-                  [:optgroup {:label "Numbers"} [:option {:value :one} "One"]
-                   [:option {:value :two} "Two"]
-                   [:option {:value :three} "Three"]
-                   [:option {:value :four} "Four"]]
-                  [:optgroup {:label "Leters"} [:option {:value :a} "A"]
-                   [:option {:value :b} "B"]
-                   [:option {:value :c} "C"]
-                   [:option {:value :d} "D"]]] nil]
-                [:div.plain-field {}
-                 [:label {:for :text-area} "Text area"]
-                 [:textarea {:id        :textarea
-                             :value     "Textarea value"
-                             :on-change :was-function}] nil]
-                [:div.plain-field {}
-                 [:label {:for :text} "Text with deep keys"]
-                 [:input {:type        :text
-                          :id          :text
-                          :placeholder "placeholder"
-                          :value       "Text with deep keys value"
-                          :on-change   :was-function}] nil]
-                [:div.plain-field {}
-                 [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
-                 [:input {:type        :text
-                          :id          :text-with-extra-validation-errors
-                          :placeholder "This will be marked as a validation error also when Text and General have validation errors."
-                          :value       ""
-                          :on-change   :was-function}] nil]
-                [:div {}
-                 [:input {:type            :checkbox
-                          :id              :checkbox
-                          :default-checked true
-                          :on-change       :was-function}]
-                 [:label {:for :checkbox} "Checkbox"] nil]
-                [:div.plain-field {}
-                 [:label [:input {:type            :radio
-                                  :name            :radio-buttons
-                                  :value           "radio-option-1"
-                                  :default-checked false
-                                  :on-change       :was-function}] "Radio Option 1"]
-                 [:label [:input {:type            :radio
-                                  :name            :radio-buttons
-                                  :value           "radio-option-2"
-                                  :default-checked true
-                                  :on-change       :was-function}] "Radio Option 2"]
-                 [:label [:input {:type            :radio
-                                  :name            :radio-buttons
-                                  :value           "radio-option-3"
-                                  :default-checked false
-                                  :on-change       :was-function}] "Radio Option 3"] nil]
-                [:button "Button"]]))))))
+      (let [generated-form (hide-on-change
+                             (free-form/form {:text          "Text value"
+                                              :email         "Email value"
+                                              :password      "Password value"
+                                              ;:select "cat" ; TODO: enable this and fix generation, as it's broken right now.
+                                              ;:select-with-group "two" ; TODO: enable this and fix generation, as it's broken right now.
+                                              :textarea      "Textarea value"
+                                              :t             {:e {:x {:t "Text with deep keys value"}}}
+                                              :checkbox      true
+                                              :radio-buttons "radio-option-2"}
+                                             {} (fn [_keys _value]) plain-reagent-form-template))
+            expected-form [:form {:noValidate true}
+                           nil
+                           [:div.plain-field {}
+                            [:label {:for :text} "Text"]
+                            [:input {:type        :text
+                                     :id          :text
+                                     :placeholder "placeholder"
+                                     :value       "Text value"
+                                     :on-change   :was-function}] nil]
+                           [:div.plain-field {}
+                            [:label {:for :email} "Email"]
+                            [:input {:type        :email
+                                     :id          :email
+                                     :placeholder "placeholder@example.com"
+                                     :value       "Email value"
+                                     :on-change   :was-function}] nil]
+                           [:div.plain-field {}
+                            [:label {:for :password} "Password"]
+                            [:input {:type      :password
+                                     :id        :password
+                                     :value     "Password value"
+                                     :on-change :was-function}] nil]
+                           [:div.plain-field {}
+                            [:label {:for :select} "Select"]
+                            [:select {:type      :select
+                                      :id        :select
+                                      :value     ""
+                                      :on-change :was-function} [:option]
+                             [:option {:value :dog} "Dog"]
+                             [:option {:value :cat} "Cat"]
+                             [:option {:value :squirrel} "Squirrel"]
+                             [:option {:value :giraffe} "Giraffe"]] nil]
+                           [:div.plain-field {}
+                            [:label {:for :select} "Select with groups"]
+                            [:select {:type      :select
+                                      :id        :select-with-group
+                                      :value     ""
+                                      :on-change :was-function} [:option]
+                             [:optgroup {:label "Numbers"} [:option {:value :one} "One"]
+                              [:option {:value :two} "Two"]
+                              [:option {:value :three} "Three"]
+                              [:option {:value :four} "Four"]]
+                             [:optgroup {:label "Leters"} [:option {:value :a} "A"]
+                              [:option {:value :b} "B"]
+                              [:option {:value :c} "C"]
+                              [:option {:value :d} "D"]]] nil]
+                           [:div.plain-field {}
+                            [:label {:for :text-area} "Text area"]
+                            [:textarea {:id        :textarea
+                                        :value     "Textarea value"
+                                        :on-change :was-function}] nil]
+                           [:div.plain-field {}
+                            [:label {:for :text} "Text with deep keys"]
+                            [:input {:type        :text
+                                     :id          :text
+                                     :placeholder "placeholder"
+                                     :value       "Text with deep keys value"
+                                     :on-change   :was-function}] nil]
+                           [:div.plain-field {}
+                            [:label {:for :text-with-extra-validation-errors} "Text with extra validation errors"]
+                            [:input {:type        :text
+                                     :id          :text-with-extra-validation-errors
+                                     :placeholder "This will be marked as a validation error also when Text and General have validation errors."
+                                     :value       ""
+                                     :on-change   :was-function}] nil]
+                           [:div {}
+                            [:input {:type            :checkbox
+                                     :id              :checkbox
+                                     :default-checked true
+                                     :on-change       :was-function}]
+                            [:label {:for :checkbox} "Checkbox"] nil]
+                           [:div.plain-field {}
+                            [:label [:input {:type            :radio
+                                             :name            :radio-buttons
+                                             :value           "radio-option-1"
+                                             :default-checked false
+                                             :on-change       :was-function}] "Radio Option 1"]
+                            [:label [:input {:type            :radio
+                                             :name            :radio-buttons
+                                             :value           "radio-option-2"
+                                             :default-checked true
+                                             :on-change       :was-function}] "Radio Option 2"]
+                            [:label [:input {:type            :radio
+                                             :name            :radio-buttons
+                                             :value           "radio-option-3"
+                                             :default-checked false
+                                             :on-change       :was-function}] "Radio Option 3"] nil]
+                           [:button "Button"]]]
+        (is (= generated-form expected-form)
+            (with-out-str (cljs.pprint/pprint generated-form)))))))
