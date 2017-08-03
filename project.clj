@@ -13,10 +13,8 @@
 
   :dependencies [[org.clojure/clojurescript "1.9.293" :scope "provided"]
                  [org.clojure/clojure "1.8.0" :scope "provided"]
-                 [cljsjs/react-with-addons "15.4.2-2" :scope "provided"]
-                 [reagent "0.6.1" :exclusions [cljsjs/react] :scope "provided"]
+                 [reagent "0.6.0" :scope "provided"]
                  [re-frame "0.8.0" :scope "provided"]
-                 [tech.dashman/reagent-toolbox "0.1.0-SNAPSHOT" :scope "provided"]
                  [doo "0.1.7" :scope "provided"]]
   :plugins [[lein-cljsbuild "1.1.4"]
             [lein-doo "0.1.7"]]
