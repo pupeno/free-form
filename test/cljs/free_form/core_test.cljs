@@ -195,7 +195,7 @@
                 [:div {}
                  [:input {:type            :checkbox
                           :id              :checkbox
-                          :default-checked false
+                          :checked         false
                           :on-change       :was-function}]
                  [:label {:for :checkbox} "Checkbox"]
                  nil]
@@ -204,21 +204,21 @@
                   [:input {:type            :radio
                            :name            :radio-buttons
                            :value           "radio-option-1"
-                           :default-checked false
+                           :checked         false
                            :on-change       :was-function}]
                   "Radio Option 1"]
                  [:label
                   [:input {:type            :radio
                            :name            :radio-buttons
                            :value           "radio-option-2"
-                           :default-checked false
+                           :checked         false
                            :on-change       :was-function}]
                   "Radio Option 2"]
                  [:label
                   [:input {:type            :radio
                            :name            :radio-buttons
                            :value           "radio-option-3"
-                           :default-checked false
+                           :checked         false
                            :on-change       :was-function}]
                   "Radio Option 3"]
                  nil]
@@ -306,23 +306,23 @@
                 [:div {}
                  [:input {:type            :checkbox
                           :id              :checkbox
-                          :default-checked true
+                          :checked         true
                           :on-change       :was-function}]
                  [:label {:for :checkbox} "Checkbox"] nil]
                 [:div.plain-field {}
                  [:label [:input {:type            :radio
                                   :name            :radio-buttons
                                   :value           "radio-option-1"
-                                  :default-checked false
+                                  :checked         false
                                   :on-change       :was-function}] "Radio Option 1"]
                  [:label [:input {:type            :radio
                                   :name            :radio-buttons
                                   :value           "radio-option-2"
-                                  :default-checked true
+                                  :checked         true
                                   :on-change       :was-function}] "Radio Option 2"]
                  [:label [:input {:type            :radio
                                   :name            :radio-buttons
                                   :value           "radio-option-3"
-                                  :default-checked false
+                                  :checked         false
                                   :on-change       :was-function}] "Radio Option 3"] nil]
                 [:button "Button"]]))))))
